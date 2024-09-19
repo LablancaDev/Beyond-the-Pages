@@ -17,7 +17,7 @@
                 -express: Para crear tu servidor.
                 -cors: Para habilitar CORS, lo que permite que tu frontend se comunique con tu backend.
                 -multer: Para manejar la carga de archivos (imágenes).
-                -mongoose: Para interactuar con MongoDB.
+                -mongoose: Para interactuar con MongoDB.         ->IMPORTANTE: Mongoose, una librería de Node.js que facilita la interacción con MongoDB.<-
                 -dotenv: Para manejar variables de entorno.
                 -axios para realizar peticiones asincronas al servidor, también se puede utilizar fetch de forma nativa en React
 
@@ -91,3 +91,25 @@
         10- Vamos a usar MongoDB Atlas para la base de datos en la nube y Mongoose como ODM (Object Data Modeling) para interactuar con MongoDB desde tu aplicación de Node.js.
 
         instalación: npm install mongoose
+
+
+        11- En este proyecto utilizaré redux-persist para mantener las sesiones iniciadas y datos consistentes como la foto de login y el nombre:
+
+            Instalación de redux-persist:  
+
+            Instalación de tipos para redux-persist: npm install --save-dev @types/redux-persist (en caso de usar typescript)
+
+        *Nota para que carguen las imágenes correctamente definir la ruta adecuada en routesServer.ts: (solo funciona si la carpeta la creamos dentro de dist)
+            dist en donde se almacena el código compilado de ts a js para que node.js pueda entenderlo y ejecutarlo
+            
+            // Configuración de almacenamiento para multer
+            const storage = multer.diskStorage({
+                destination: path.join(__dirname, '../dist/uploads'), // Guardar imágenes en "uploads"
+                filename: (req, file, cb) => {
+                    cb(null, `${Date.now()}-${file.originalname}`); // Nombre único para cada archivo
+                },
+            });    
+
+
+
+

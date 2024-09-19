@@ -16,7 +16,7 @@ const UserSchema = new Schema({
     },
     profile_image: {
         type: String,
-        required: false, // La imagen no es obligatoria
+        required: false,
     },
 });
 // Crear y exportar el modelo de Usuario

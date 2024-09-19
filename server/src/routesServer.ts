@@ -13,7 +13,7 @@ const router = express.Router();
 
 // Configuración de almacenamiento para multer
 const storage = multer.diskStorage({
-    destination: path.join(__dirname, '../uploads'), // Guardar imágenes en "uploads"
+    destination: path.join(__dirname, '../dist/uploads'), // Guardar imágenes en "uploads"
     filename: (req, file, cb) => {
         cb(null, `${Date.now()}-${file.originalname}`); // Nombre único para cada archivo
     },

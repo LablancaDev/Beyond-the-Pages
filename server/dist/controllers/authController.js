@@ -11,9 +11,11 @@ import User from '../models/User.js'; // Asegúrate de que la ruta sea correcta
 export const registerNewUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
-        console.log('Datos recibidos:', req.body); // Esto te mostrará qué datos se están recibiendo
+        console.log('Datos recibidos:', req.body); // datos recibidos
+        // Se extraen los datos del cuerpo de la solicitud
         const { name, email, password } = req.body;
-        const profile_image = (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename; // Asumiendo que la imagen es guardada correctamente
+        // También se extrae el nombre del archivo de la imágen, que es el archivo subido a través de Multer (un middleware de Node.js para manejar archivos).
+        const profile_image = (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename;
         // Agregamos un log para verificar los datos que se van a insertar
         console.log('Datos a insertar:', { name, email, password, profile_image });
         // Asegúrate de que todos los campos están presentes
@@ -30,13 +32,17 @@ export const registerNewUser = (req, res) => __awaiter(void 0, void 0, void 0, f
             res.status(400).json({ message: "La contraseña debe tener al menos 6 caracteres" });
             return;
         }
+        // Se pasan los datos (name, email, password, profile_image) al constructor del modelo con los datos que vienen de la solicitud, creando una instancia de User.
+        //  Esto sería similar a crear un objeto de una clase en lenguajes de programación orientados a objetos. como en Java
         const newUser = new User({
             name,
             email,
-            password, // Asegúrate de hashear la contraseña aquí
+            password,
             profile_image,
         });
-        yield newUser.save(); // Guardar el nuevo usuario en la base de datos
+        yield newUser.save(); // El usuario recién creado se guarda en la base de datos MongoDB usando el método save(). Mongoose convierte ese objeto en un documento que se guarda en MongoDB.
+        // MongoDB asignará automáticamente un ID único a este nuevo registro, y los datos serán almacenados.
+        // Si todo funciona bien, se responde con un código HTTP 201 (Created) y un mensaje de éxito. También se devuelve el usuario recién creado.
         res.status(201).json({
             message: 'User registered successfully',
             user: newUser,
@@ -57,7 +63,13 @@ export const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, functio
         }
         // validación password
         if (user.password === password) {
-            res.status(200).json({ message: 'Login exitoso', id: user._id, name: user.name, email: user.email });
+            res.status(200).json({
+                message: 'Login exitoso',
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                profileImage: user.profile_image,
+            });
             return;
         }
     }
@@ -69,3 +81,5 @@ export const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, functio
 // * NOTAS:
 // No necesitas crear tablas en MongoDB como lo harías en bases de datos SQL. En su lugar, MongoDB utiliza colecciones y documentos.
 // En Mongo DB el controlador es quien se encarga de hacer las consultas y manejar los datos 
+// Estoy usando Mongoose, una librería de Node.js que facilita la interacción con MongoDB mediante la definición de modelos y esquemas.
+// Mongoose traduce las interacciones en el código (como newUser.save()) en comandos de MongoDB que se ejecutan en la base de datos.

@@ -1,10 +1,27 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // O cualquier otro almacenamiento que necesites
+import authSlice from "./authSlice";
 
+// Configuración de persistencia
+const persistConfig = {
+    key: "root", // La clave que se usará para almacenar el estado
+    storage,     // El almacenamiento que se usará (localStorage en este caso)
+};
+
+// Crea un reducer persistente
+const persistedReducer = persistReducer(persistConfig, authSlice);
 
 const store = configureStore({
     reducer: {
-        auth: autSlice;
+        auth: persistedReducer, // Usa el reducer persistente
     }
-})
+});
 
-export default store;
+// Crea el persistor
+const persistor = persistStore(store);
+
+export type RootState = ReturnType<typeof store.getState>;       
+export type AppDispatch = typeof store.dispatch;
+
+export { store, persistor }; // Exporta el store y el persistor

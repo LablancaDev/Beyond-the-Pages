@@ -1,15 +1,18 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setUser } from '../redux/authSlice';
 
 const Login = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const [name, setName] = useState('');
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
-    const [changeRegisterLogin, setChangeRegisterLogin] = useState(false);
     const [image, setImage] = useState<File | null>(null)
+    const [changeRegisterLogin, setChangeRegisterLogin] = useState(false);
 
     const handleInputName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value)
@@ -30,7 +33,6 @@ const Login = () => {
         dataUser.append('name', name)
         dataUser.append('password', password)
         dataUser.append('email', email)
-
         // Añadir la imágen
         if (image) {
             dataUser.append('profile_image', image);
@@ -65,18 +67,31 @@ const Login = () => {
         }
     }
 
+    // Función que se encarga de logear a un usuario
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
+        // se desestructuran los datos que el usuario introduce en el formulario para logearse
+        const userDataLogin = {email, password}
+        
         try {
-            const response = await axios.post("http://localhost:5000/api/users/login", {
-                email,
-                password
-            })
+            const response = await axios.post("http://localhost:5000/api/users/login", userDataLogin)   
+
+            console.log("Datos del user devueltos por el servidor: ", response)
 
             // Si el login es exitoso
             alert(response.data.message);
 
-            navigate('home')
+            // Se extraen los datos de la respuesta del objeto de la respuesta con destructuración
+            const { id, name, email, profileImage } = response.data;
+            // Se actualiza el estado global con los nuevos datos del nuevo usuario
+            dispatch(setUser({
+                user_id: id,
+                userName: name,
+                userEmail: email,
+                profileImage: profileImage,     
+            }));
+
+            navigate('/home')
 
         } catch (error) {
             console.log('Error durante el login:', error);

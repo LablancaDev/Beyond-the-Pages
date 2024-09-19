@@ -1,7 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { RootState, persistor } from '../redux/store'
+import { useDispatch } from 'react-redux'
+import { logout } from '../redux/authSlice'
+import axios from 'axios'
+import { profile } from 'console'
 
 const NavBar = () => {
+    const dispatch = useDispatch()
+
+    // extraer el valor de userName del estado de Redux para mostrar el usuario que inció sesión, su nombre e imágen.
+    const { userName, profileImage } = useSelector((state: RootState) => state.auth)
+    // const Name = useSelector((state: RootState) => state.auth.userName); (es lo mismo que arriba, pero arriba desestructura más como para extaer más propiedades de redux en el futuro)
+
+    console.log("Imagen: ", profileImage)
+    console.log("profileImage es un:", typeof(profileImage))
+
+    const log_out = () => {
+        dispatch(logout())
+        persistor.purge(); // Limpia el almacenamiento persistido
+    }
+  
+
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -50,9 +71,13 @@ const NavBar = () => {
                                     </Link>
                                     <li><a className="dropdown-item" href="#">My profile</a></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item" href="#">Log out</a></li>
+                                    <li><a onClick={log_out} className="dropdown-item" href="#">Log out</a></li>
                                 </ul>
                             </div>
+                            <div className='text-success'>{userName}</div>
+                            {profileImage &&
+                                <img className='img-fluid imageProfile' src={`http://localhost:5000/uploads/${profileImage}`} alt="profile image" />  
+                            }
                         </div>
                     </div>
                 </div>

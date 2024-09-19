@@ -2,3 +2,7 @@ a{
   text-decoration: none;
   cursor: pointer;
 }
+/* navbar */
+.imageProfile{
+  width: 2em;
+}

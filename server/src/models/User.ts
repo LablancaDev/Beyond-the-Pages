@@ -7,7 +7,7 @@ export interface IUser extends Document {
     name: string;
     email: string;
     password: string;
-    profile_image?: string; // Opcional si no siempre es requerido
+    profile_image?: string; 
 }
 
 // Definir el esquema del Usuario
@@ -27,7 +27,7 @@ const UserSchema: Schema = new Schema({
     },
     profile_image: {
         type: String,
-        required: false, // La imagen no es obligatoria
+        required: false, 
     },
 });
 
