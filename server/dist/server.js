@@ -18,6 +18,7 @@ app.use(cors()); // Habilitar CORS
 app.use(express.json()); // Parsear JSON
 // Rutas
 app.use('/api/users', routesServer);
+app.use('/api/books', routesServer);
 // Servir imágenes subidas de forma estática
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Iniciar el servidor

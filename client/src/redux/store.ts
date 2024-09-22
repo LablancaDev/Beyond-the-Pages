@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // O cualquier otro almacenamiento que necesites
 import authSlice from "./authSlice";
+import booksSlice from "./booksSlice";
+import cartSlice from "./cartSlice";
 
 // Configuración de persistencia
 const persistConfig = {
@@ -15,6 +17,8 @@ const persistedReducer = persistReducer(persistConfig, authSlice);
 const store = configureStore({
     reducer: {
         auth: persistedReducer, // Usa el reducer persistente
+        books: booksSlice,
+        cart: cartSlice,
     }
 });
 

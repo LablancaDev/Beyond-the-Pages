@@ -4,6 +4,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { loginUser, registerNewUser } from './controllers/authController.js'; // Siempre añadir .js muy importante para la importación con node
+import { addDataBooks, getDataBooks } from './controllers/booksControllers.js';
+import { deleteBook, getDataBooksCart } from './controllers/cartController.js';
 // Simulación de __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -21,4 +23,12 @@ const upload = multer({ storage }); // Middleware para manejo de archivos
 router.post('/register', upload.single('profile_image'), registerNewUser);
 // * Ruta para logear un usuario
 router.post('/login', loginUser);
+// * Ruta para solicitar los datos de la API de libros
+router.get('/getbooks', getDataBooks);
+// * Ruta para agregar los libros a la base de datos
+router.post('/addBooks', addDataBooks);
+// * Ruta para obtener de la base de datos los libros del carrito del usuario logeado 
+router.get('/getBooksFromCart', getDataBooksCart);
+// * Ruta para eliminar un libro de la base de datos
+router.post('/removeBook', deleteBook);
 export default router;

@@ -6,3 +6,37 @@ a{
 .imageProfile{
   width: 2em;
 }
+/* home */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #dee2e6; /* Bordes más claros */
+  cursor: pointer;
+}
+.card-title {
+  /* Oculta el contenido que desborda */
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+
+.card:hover {
+  transform: scale(1.05); /* Aumenta el tamaño ligeramente */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra al hacer hover */
+}
+
+.card-title {
+  font-weight: bold; /* Título más destacado */
+}
+
+.img-fluid {
+  border-radius: 0.5rem; /* Bordes redondeados para la imagen */
+}
+
+.container-fluid {
+  padding: 20px; /* Espaciado alrededor del contenedor */
+}
+
+h1 {
+  color: #007bff; /* Color del título */
+}

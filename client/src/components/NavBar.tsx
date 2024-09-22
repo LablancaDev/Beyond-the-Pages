@@ -15,13 +15,13 @@ const NavBar = () => {
     // const Name = useSelector((state: RootState) => state.auth.userName); (es lo mismo que arriba, pero arriba desestructura más como para extaer más propiedades de redux en el futuro)
 
     console.log("Imagen: ", profileImage)
-    console.log("profileImage es un:", typeof(profileImage))
+    console.log("profileImage es un:", typeof (profileImage))
 
     const log_out = () => {
         dispatch(logout())
         persistor.purge(); // Limpia el almacenamiento persistido
     }
-  
+
 
     return (
         <>
@@ -56,11 +56,10 @@ const NavBar = () => {
                                 <a className="nav-link disabled" aria-disabled="true">Disabled</a>
                             </li>
                         </ul>
-                        <form className="d-flex me-3" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
                         <div className='d-flex justify-content-center gap-3'>
+                            <Link to={"/cart"}>
+                                <a href=""><i className="bi bi-bag-heart-fill"></i></a>
+                            </Link>
                             <div className="dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Login
@@ -74,9 +73,9 @@ const NavBar = () => {
                                     <li><a onClick={log_out} className="dropdown-item" href="#">Log out</a></li>
                                 </ul>
                             </div>
-                            <div className='text-success'>{userName}</div>
+                            <div className='text-primary'>{userName}</div>
                             {profileImage &&
-                                <img className='img-fluid imageProfile' src={`http://localhost:5000/uploads/${profileImage}`} alt="profile image" />  
+                                <img className='img-fluid imageProfile' src={`http://localhost:5000/uploads/${profileImage}`} alt="profile image" />
                             }
                         </div>
                     </div>
