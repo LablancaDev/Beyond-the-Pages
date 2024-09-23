@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { CartBook } from '../redux/types'
@@ -83,7 +83,7 @@ const Cart = () => {
        dispatch(removeFromCart(bookId))
 
        // ELIMINAR LOS LIBROS DE LA DB... 
-      const response = axios.post("http://localhost:5000/api/books/removeBook", {
+        axios.post("http://localhost:5000/api/books/removeBook", {
         bookId,           // id del libro a eliminar
         userId: user_id   // id del usuario logeado, se elimina el libro de su carrito
       })

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { RootState, persistor } from '../redux/store'
 import { useDispatch } from 'react-redux'
 import { logout } from '../redux/authSlice'
-import axios from 'axios'
-import { profile } from 'console'
+
+
 
 const NavBar = () => {
     const dispatch = useDispatch()

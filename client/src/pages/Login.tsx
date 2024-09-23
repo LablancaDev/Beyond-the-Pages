@@ -42,7 +42,7 @@ const Login = () => {
         }
 
         try {
-            const response = await axios.post("http://localhost:5000/api/users/register", dataUser, {
+            await axios.post("http://localhost:5000/api/users/register", dataUser, {
                 headers: {
                     'Content-Type': 'multipart/form-data',  //definir siempre para enviar imágenes en la cabecera
                 },
@@ -71,10 +71,10 @@ const Login = () => {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
         // se desestructuran los datos que el usuario introduce en el formulario para logearse
-        const userDataLogin = {email, password}
-        
+        const userDataLogin = { email, password }
+
         try {
-            const response = await axios.post("http://localhost:5000/api/users/login", userDataLogin)   
+            const response = await axios.post("http://localhost:5000/api/users/login", userDataLogin)
 
             console.log("Datos del user devueltos por el servidor: ", response)
 
@@ -88,7 +88,7 @@ const Login = () => {
                 user_id: id,
                 userName: name,
                 userEmail: email,
-                profileImage: profileImage,     
+                profileImage: profileImage,
             }));
 
             navigate('/home')
