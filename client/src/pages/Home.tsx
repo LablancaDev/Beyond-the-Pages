@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchBooksFailure, fetchBooksStart, fetchBooksSuccess } from '../redux/booksSlice';
 import { addToCart } from '../redux/cartSlice';
+import banner from '../assets/img/banner.webp'
 
 const Home = () => {
     // Recuperación de user_id del estado global, necesario para enviarlo al añadir productos y poderlos asocia al id del usuario que inició la sesión 
@@ -137,6 +138,9 @@ const Home = () => {
     return (
         <div className='container-fluid'>
             <h1 className='text-center my-4'>Books List</h1>
+            <div className=''>
+                <img className='img-fluid' src={banner} alt="banner" />
+            </div>
             <select className='my-3 form-control w-25' onChange={handleCategory}>
                 <option value="">Filtro por Categoría</option>
                 {Array.from( // Convierte el conjunto de nuevo en un array para poder mapearlo.
@@ -175,13 +179,13 @@ const Home = () => {
                             </div>
                             <div>
                                 <h5 className='text-danger'>{book.price} €</h5>
-                                <p className='text-success'>ENVÍO GRATIS!</p>
+                                <p className='text-success'>ENVÍO GRATIS! <i className="bi bi-truck"></i></p>
                             </div>
                             <div>
-                                <button onClick={() => handleAddBook(book)} className='btn btn-success m-2'>Añadir</button>
+                                <button onClick={() => handleAddBook(book)} className='btn btn-success m-2'><i className="bi bi-bag-heart"></i> Añadir</button>
                             </div>
                             {/*se define primero book.key para que no sea undefined antes de intentar acceder a purchasedBooks. */}
-                            {book.key && purchasedBooks[book.key] && <p className='text-warning'>Comprado!</p>} {/* Solo muestra el mensaje si ha sido comprado el libro*/}
+                            {book.key && purchasedBooks[book.key] && <p className='text-primary'>Comprado!</p>} {/* Solo muestra el mensaje si ha sido comprado el libro*/}
                         </div>
                     </div>
                 ))}

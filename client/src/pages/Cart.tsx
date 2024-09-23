@@ -5,6 +5,7 @@ import { RootState } from '../redux/store'
 import { CartBook } from '../redux/types'
 import { useDispatch } from 'react-redux'
 import { clearCart, removeFromCart } from '../redux/cartSlice'
+import oferta from '../assets/img/oferta.jpg'
 
 const Cart = () => {
   const dispatch = useDispatch()
@@ -105,6 +106,9 @@ const Cart = () => {
   return (
     <div className="container-fluid">
       <h1 className='text-center my-4'>Cart Books</h1>
+      <div className='d-flex justify-content-center'>
+        <img className='img-fluid m-auto w-75' src={oferta} alt="oferta" />
+      </div>
         <div className='d-flex justify-content-center'>
           <button onClick={clearMyCart} className='btn btn-warning w-25 my-3'>Vaciar Carrio</button>
         </div>
@@ -120,7 +124,7 @@ const Cart = () => {
                 <h5 className='text-danger text-center'>{book.price} €</h5>
               </div>
               <div className='m-auto p-2'>
-                <button onClick={()=>removeFromMyCart(book.bookId)} className='btn btn-danger'>Eliminar</button>
+                <button onClick={()=>removeFromMyCart(book.bookId)} className='btn btn-danger'>Eliminar <i className="bi bi-trash3"></i></button>
               </div>
               <div>
                 <h6 className='text-center'>Cantidad: {book.quantity}</h6>
