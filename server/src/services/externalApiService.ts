@@ -13,7 +13,7 @@ export const fetchDataApi = async (page = 1, searchTerm = '') => {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();     
+        const data = await response.json();      
 
 
         // Se está extrayendo solo la información esencial (clave, título y portada) con data.items.map() crea un nuevo array de objetos JavaScript,

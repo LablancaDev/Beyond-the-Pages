@@ -112,4 +112,78 @@
 
 
 
+########PROCESO DE ARRANQUE DEL PROYECTO :########
+
+    1.Arrancar el servidor Express:
+
+        C:\Users\David\Desktop\Proyectos personales con React\beyound_the_pages\server> node dist/server.js
+
+
+    2. Activar la Compilación Automática con Modo de Vigilancia: compilación de archivos .ts de la carpeta src a .js en la carpeta dist
+
+        npx tsc --watch (dentro de server)
+
+        
+    3. Levantar el Servidor de Desarrollo de React: (dentro de la carpeta client en el Frontend)
+
+        C:\Users\David\Desktop\Proyectos personales con React\beyound_the_pages\client> npm run dev
+
+
+
+       
+## PARA POR DESPLEGAR UN PROYECTO FULLSTACK CON UN SERVIDOR Y UN BACKEND EN VERCEL ##
+
+1.cambiar todas las peticiones que actualmente apuntan a tu servidor local (localhost o 127.0.0.1) en tu frontend y
+redirigirlas a la URL de tu servidor que está alojado en Vercel:
+
+    // Antes (cuando estaba en local)
+    fetch('http://localhost:5000/api/books')
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+    // Después (ahora en producción en Vercel)
+    fetch('https://your-vercel-app.vercel.app/api/books')
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+2.Usa Variables de Entorno: Para facilitar la transición entre entornos (desarrollo y producción), puedes usar variables de entorno. 
+Así no tendrás que cambiar manualmente las URLs cada vez que pases de un entorno a otro.
+
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
+    fetch(`${API_URL}/api/books`)
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+3.Esquema de Comunicación Frontend-Servidor en Vercel
+
+    +--------------------+        HTTP Request         +------------------------+       Database Access      +---------------------+
+|  React Frontend    |   --------------------->    |  Express Backend (Vercel)|   --------------------->   |   MongoDB Atlas      |
+|  (Vercel)          |                              |  API Endpoints          |                             |  (Cloud)             |
+|                    |   <---------------------    |  Serveless Functions     |   <---------------------   |                     |
++--------------------+        HTTP Response         +------------------------+       Query Results         +---------------------+
+
+
+Flujo de Comunicación:
+
+1-React Frontend (cliente):
+
+    El frontend de React está desplegado en Vercel como un sitio estático.
+    El usuario interactúa con la interfaz.
+    Cuando el usuario necesita datos (como libros desde Google Books o tu base de datos), se realiza una petición HTTP desde el frontend al backend (Express) también alojado en Vercel.
+
+2-Express Backend (servidor):
+
+    El backend es un servidor Express configurado como servidor sin estado (serverless) en Vercel. Esto significa que cada endpoint es manejado como una función independiente, desplegada y gestionada por Vercel.
+    El backend procesa la petición, por ejemplo, buscando libros o accediendo a la base de datos MongoDB Atlas.
+    Responde al frontend con los datos necesarios (en JSON, por ejemplo).
+
+3-MongoDB Atlas (base de datos):
+
+    El backend se conecta remotamente a MongoDB Atlas para realizar las consultas necesarias a la base de datos.
+    La base de datos responde con los datos, que son enviados de vuelta al frontend a través del servidor Express.
+
+
+
+    ## AHORA EL PROYECTO TIENE EL MODO PRODUCCIÓN Y EL MODO DESARROLLO ##
 
