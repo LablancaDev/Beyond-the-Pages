@@ -5,6 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { setUser } from '../redux/authSlice';
 
 const Login = () => {
+
+    // En lugar de usar "http://localhost:5000" directamente, ahora usaré apiUrl que cambia según si estoy en modo desarrollo o producción.
+    // Vercel automáticamente asignará el valor de NODE_ENV a production cuando se despliegue, por lo que se usará la URL de producción (REACT_APP_API_URL_PRODUCTION).
+     // Obtener la URL base de la API según el entorno
+     const apiUrl = process.env.NODE_ENV === 'production' 
+     ? process.env.REACT_APP_API_URL_PRODUCTION 
+     : process.env.REACT_APP_API_URL_LOCAL;
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -42,7 +50,7 @@ const Login = () => {
         }
 
         try {
-            await axios.post("http://localhost:5000/api/users/register", dataUser, {
+            await axios.post(`${apiUrl}/users/register`, dataUser, { // ruta servidor local: "http://localhost:5000/api/users/register"
                 headers: {
                     'Content-Type': 'multipart/form-data',  //definir siempre para enviar imágenes en la cabecera
                 },
@@ -74,7 +82,7 @@ const Login = () => {
         const userDataLogin = { email, password }
 
         try {
-            const response = await axios.post("http://localhost:5000/api/users/login", userDataLogin)
+            const response = await axios.post(`${apiUrl}/users/login`, userDataLogin)
 
             console.log("Datos del user devueltos por el servidor: ", response)
 

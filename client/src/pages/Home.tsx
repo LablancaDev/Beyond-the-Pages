@@ -9,6 +9,12 @@ import { addToCart } from '../redux/cartSlice';
 import banner from '../assets/img/banner.webp'
 
 const Home = () => {
+
+     // Obtener la URL base de la API según el entorno
+    const apiUrl = process.env.NODE_ENV === 'production' 
+    ? process.env.REACT_APP_API_URL_PRODUCTION 
+    : process.env.REACT_APP_API_URL_LOCAL;
+
     // Recuperación de user_id del estado global, necesario para enviarlo al añadir productos y poderlos asocia al id del usuario que inició la sesión 
     const { user_id } = useSelector((state: RootState) => state.auth)
 
@@ -32,7 +38,7 @@ const Home = () => {
         dispatch(fetchBooksStart())  
 
         try {
-            const response = await axios.get(`http://localhost:5000/api/books/getBooks?page=${page}`);
+            const response = await axios.get(`${apiUrl}/books/getBooks?page=${page}`); // url que apunta a servidor local: `http://localhost:5000/api/books/getBooks?page=${page}`
             const data = response.data;
             dispatch(fetchBooksSuccess(data));
             setFilteredBooks(data); // Inicialmente, todos los libros son filtrados
@@ -105,7 +111,7 @@ const Home = () => {
     const handleAddBook = async (book: Book) => {
         const userId = user_id; // Id del usuario que está logeado para asignar el libro a ese user 
         try {
-            const response = await axios.post("http://localhost:5000/api/books/addBooks", {
+            const response = await axios.post(`${apiUrl}/books/addBooks`, { // a server local: "http://localhost:5000/api/books/addBooks"
                 userId, // Reemplaza esto con el ID del usuario que está logeado
                 book
                 // IMPORTANTE BOOK CONTIENE LOS DATOS DEL LIBRO, PASAMOS EL ARRAY DE OBJETOS DIRECTAMENTE AL CONTROLADOR, ALLÍ SE EXTRAE LOS DATOS NECESARIOS, COMO EL ID DEL LIBRO
