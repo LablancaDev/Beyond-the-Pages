@@ -12,8 +12,12 @@ const Home = () => {
 
      // Obtener la URL base de la API según el entorno
      const apiUrl = import.meta.env.MODE === 'production' 
-     ? import.meta.env.VITE_API_URL_PRODUCTION 
-     : import.meta.env.VITE_API_URL_LOCAL; 
+     ? import.meta.env.VITE_APP_API_URL_PRODUCTION 
+     : import.meta.env.VITE_APP_API_URL_LOCAL; 
+
+     console.log("API URL:", apiUrl);
+     console.log("Variables de entorno:", import.meta.env); // para verificar si las variables de entorno están disponibles y cargadas.
+     console.log(import.meta.env.MODE)
 
     // Recuperación de user_id del estado global, necesario para enviarlo al añadir productos y poderlos asocia al id del usuario que inició la sesión 
     const { user_id } = useSelector((state: RootState) => state.auth)
@@ -94,15 +98,12 @@ const Home = () => {
             setFilteredBooks(books);
         }
     }
-    // // Aquí vemos que category dentro de cada book en un array 
-    // console.log("Array completo de libros:", books.map(book => book));
-    // // Es una lista de strings
-    // console.log("Títulos de libros:", books.map(book => book.title));
-    // // Es un array de strings (hay libros que no tienen category)
-    // console.log("Categorías de libros:", books.map(book => book.category));
-    // // Es una lista de strings
-    // console.log("Portadas de libros:", books.map(book => book.cover));
-    // console.log("Categoria seleccionada:", selectCategory)
+  // Aquí comprobamos que books es un array antes de intentar mapearlo
+  console.log("Array completo de libros:", Array.isArray(books) ? books : []);
+  console.log("Títulos de libros:", Array.isArray(books) ? books.map(book => book.title) : []);
+  console.log("Categorías de libros:", Array.isArray(books) ? books.map(book => book.category) : []);
+  console.log("Portadas de libros:", Array.isArray(books) ? books.map(book => book.cover) : []);
+  console.log("Categoria seleccionada:", selectCategory);
 
     // console.log("Libros filtrados por categoría:", filteredBooks)
     console.log(selectCategory)
@@ -171,7 +172,7 @@ const Home = () => {
                 className='form-control mb-4'
             />
             <div className="row">
-                {filteredBooks.map((book, index) => (
+                {Array.isArray(filteredBooks) && filteredBooks.map((book, index) => (
                     <div className='col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mb-4' key={index}>
                         <div className='card text-center h-100' style={{ maxHeight: '450px' }}>
                             <img
