@@ -10,9 +10,10 @@ import oferta from '../assets/img/oferta.jpg'
 const Cart = () => {
 
   // Obtener la URL base de la API según el entorno
-  const apiUrl = process.env.NODE_ENV === 'production' 
-  ? process.env.REACT_APP_API_URL_PRODUCTION 
-  : process.env.REACT_APP_API_URL_LOCAL;
+  const apiUrl = import.meta.env.MODE === 'production' 
+    ? import.meta.env.VITE_API_URL_PRODUCTION 
+    : import.meta.env.VITE_API_URL_LOCAL;
+
 
   const dispatch = useDispatch()
 

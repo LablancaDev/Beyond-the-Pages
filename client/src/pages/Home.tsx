@@ -11,16 +11,16 @@ import banner from '../assets/img/banner.webp'
 const Home = () => {
 
      // Obtener la URL base de la API según el entorno
-    const apiUrl = process.env.NODE_ENV === 'production' 
-    ? process.env.REACT_APP_API_URL_PRODUCTION 
-    : process.env.REACT_APP_API_URL_LOCAL;
+     const apiUrl = import.meta.env.MODE === 'production' 
+     ? import.meta.env.VITE_API_URL_PRODUCTION 
+     : import.meta.env.VITE_API_URL_LOCAL; 
 
     // Recuperación de user_id del estado global, necesario para enviarlo al añadir productos y poderlos asocia al id del usuario que inició la sesión 
     const { user_id } = useSelector((state: RootState) => state.auth)
 
     const dispatch = useDispatch()
     // Obtén el estado de libros desde Redux
-    const { books, loading } = useSelector((state: RootState) => state.books)
+    const { books, loading, error } = useSelector((state: RootState) => state.books)
 
     // Estados locales
     const [page, setPage] = useState(1);
@@ -32,7 +32,7 @@ const Home = () => {
     const [purchasedBooks, setPurchasedBooks] = useState<{ [key: string]: boolean }>({}); //es un objeto que almacena el key del libro en el momento de la compra para mostrar el mensaje
 
     //* Función encargada de obtener todos los libros de la API a través del controlador, la API se consume en el backend. GESTIONA LA CARGA DE LIBROS DESDE LA API
-    const getBooks = async () => {
+    const getBooks = async () => {  
 
         // Actualiza la carga de libros a True en el estado global
         dispatch(fetchBooksStart())  
@@ -94,17 +94,17 @@ const Home = () => {
             setFilteredBooks(books);
         }
     }
-    // Aquí vemos que category dentro de cada book en un array 
-    console.log("Array completo de libros:", books.map(book => book));
-    // Es una lista de strings
-    console.log("Títulos de libros:", books.map(book => book.title));
-    // Es un array de strings (hay libros que no tienen category)
-    console.log("Categorías de libros:", books.map(book => book.category));
-    // Es una lista de strings
-    console.log("Portadas de libros:", books.map(book => book.cover));
-    console.log("Categoria seleccionada:", selectCategory)
+    // // Aquí vemos que category dentro de cada book en un array 
+    // console.log("Array completo de libros:", books.map(book => book));
+    // // Es una lista de strings
+    // console.log("Títulos de libros:", books.map(book => book.title));
+    // // Es un array de strings (hay libros que no tienen category)
+    // console.log("Categorías de libros:", books.map(book => book.category));
+    // // Es una lista de strings
+    // console.log("Portadas de libros:", books.map(book => book.cover));
+    // console.log("Categoria seleccionada:", selectCategory)
 
-    console.log("Libros filtrados por categoría:", filteredBooks)
+    // console.log("Libros filtrados por categoría:", filteredBooks)
 
 
     // Añadir un libro al carrito de compras en la base de datos 
@@ -139,7 +139,7 @@ const Home = () => {
     if (loading) {
         return <div>Loading...</div>;
     }
-
+    if (error) return <div>Error: {error}</div>;
 
     return (
         <div className='container-fluid'>

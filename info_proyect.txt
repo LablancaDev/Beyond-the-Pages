@@ -187,3 +187,19 @@ Flujo de Comunicación:
 
     ## AHORA EL PROYECTO TIENE EL MODO PRODUCCIÓN Y EL MODO DESARROLLO ##
 
+    "scripts": {
+  "dev": "vite",                           // Para desarrollo
+  "build": "tsc -b && vite build",         // Para construir el frontend y backend para producción
+  "start": "vite preview",                 // Para servir la versión de producción
+  "preview": "vite preview",               // Para previsualizar la versión de producción localmente
+  "lint": "eslint ."
+}
+
+-npm run dev: Ejecuta un servidor de desarrollo local con recarga en caliente y herramientas de depuración.
+
+-npm run preview: Será útil cuando desees previsualizar la producción localmente antes de desplegarla.
+
+-npm run build: Construye la aplicación para producción (optimizada, lista para desplegar).
+
+-npm start: Ahora servirá la aplicación en modo de producción. Esto es lo que usarías al desplegar o para simular el entorno de producción.
+

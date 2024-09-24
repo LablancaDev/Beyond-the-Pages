@@ -8,10 +8,11 @@ const Login = () => {
 
     // En lugar de usar "http://localhost:5000" directamente, ahora usaré apiUrl que cambia según si estoy en modo desarrollo o producción.
     // Vercel automáticamente asignará el valor de NODE_ENV a production cuando se despliegue, por lo que se usará la URL de producción (REACT_APP_API_URL_PRODUCTION).
-     // Obtener la URL base de la API según el entorno
-     const apiUrl = process.env.NODE_ENV === 'production' 
-     ? process.env.REACT_APP_API_URL_PRODUCTION 
-     : process.env.REACT_APP_API_URL_LOCAL;
+    // Obtener la URL base de la API según el entorno
+    const apiUrl = import.meta.env.MODE === 'production'
+        ? import.meta.env.VITE_API_URL_PRODUCTION
+        : import.meta.env.VITE_API_URL_LOCAL;
+
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
