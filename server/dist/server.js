@@ -14,7 +14,24 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 // Middlewares
-app.use(cors()); // Habilitar CORS
+// Configuración de CORS
+const allowedOrigins = [
+    'http://localhost:4173', // Tu frontend local en modo desarrollo
+    'https://beyound-the-pages.vercel.app' // Dominio de producción en Vercel
+];
+app.use(cors({
+    origin: function (origin, callback) {
+        // Permite solicitudes sin origin (como en postman) o en los dominios permitidos
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: 'GET,POST,PUT,DELETE',
+    credentials: true
+}));
 app.use(express.json()); // Parsear JSON
 // Rutas
 app.use('/api/users', routesServer);
