@@ -10,8 +10,8 @@ const Login = () => {
     // Vercel automáticamente asignará el valor de NODE_ENV a production cuando se despliegue, por lo que se usará la URL de producción (REACT_APP_API_URL_PRODUCTION).
     // Obtener la URL base de la API según el entorno
     const apiUrl = import.meta.env.MODE === 'production'
-        ? import.meta.env.VITE_API_URL_PRODUCTION
-        : import.meta.env.VITE_API_URL_LOCAL;
+        ? import.meta.env.VITE_APP_API_URL_PRODUCTION
+        : import.meta.env.VITE_APP_API_URL_LOCAL;
 
 
     const navigate = useNavigate()

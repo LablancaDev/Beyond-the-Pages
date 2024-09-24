@@ -11,8 +11,8 @@ const Cart = () => {
 
   // Obtener la URL base de la API según el entorno
   const apiUrl = import.meta.env.MODE === 'production' 
-    ? import.meta.env.VITE_API_URL_PRODUCTION 
-    : import.meta.env.VITE_API_URL_LOCAL;
+    ? import.meta.env.VITE_APP_API_URL_PRODUCTION
+    : import.meta.env.VITE_APP_API_URL_LOCAL;
 
 
   const dispatch = useDispatch()

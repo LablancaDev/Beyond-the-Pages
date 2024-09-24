@@ -16,7 +16,7 @@ const Home = () => {
      : import.meta.env.VITE_APP_API_URL_LOCAL; 
 
      console.log("API URL:", apiUrl);
-     console.log("Variables de entorno:", import.meta.env); // para verificar si las variables de entorno están disponibles y cargadas.
+     console.log("Variables de entorno:", import.meta.env); // para verificar si las variables de entorno están disponibles y cargadas. SABER EL MODO SI EN PRODUCTION O DESARROLLO
      console.log(import.meta.env.MODE)
 
     // Recuperación de user_id del estado global, necesario para enviarlo al añadir productos y poderlos asocia al id del usuario que inició la sesión 
