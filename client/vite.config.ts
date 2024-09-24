@@ -13,5 +13,12 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    proxy: {
+      '/api': {
+        target: 'https://beyound-the-pages.vercel.app', // URL de tu backend en producción
+        changeOrigin: true,
+        
+      }
+    }
   },
 })
