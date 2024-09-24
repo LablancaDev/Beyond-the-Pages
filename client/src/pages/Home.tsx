@@ -105,7 +105,7 @@ const Home = () => {
     // console.log("Categoria seleccionada:", selectCategory)
 
     // console.log("Libros filtrados por categoría:", filteredBooks)
-
+    console.log(selectCategory)
 
     // Añadir un libro al carrito de compras en la base de datos 
     const handleAddBook = async (book: Book) => {
