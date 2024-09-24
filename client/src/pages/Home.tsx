@@ -4,7 +4,7 @@ import { Book } from '../redux/types';
 import { RootState } from '../redux/store';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { fetchBooksFailure, fetchBooksStart, fetchBooksSuccess } from '../redux/booksSlice';
+import { fetchBooksFailure, fetchBooksStart, fetchBooksSuccess } from '../redux/booksSlice';  
 import { addToCart } from '../redux/cartSlice';
 import banner from '../assets/img/banner.webp'
 
