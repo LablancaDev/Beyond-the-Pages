@@ -4,13 +4,11 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import routesServer from './routesServer.js'; 
-import connectDB from './config/config.js'
+import connectDB from './config/config.js';
 
 // Simulación de __dirname en ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// dotenv.config();
 
 // Conectar a MongoDB
 connectDB();
@@ -24,25 +22,10 @@ app.use((req, res, next) => {
     next();
 });
 
-// Configuración de CORS
-const allowedOrigins = [
-  'http://localhost:4173', // Tu frontend local en modo desarrollo
-  'https://beyound-the-pages.vercel.app' // Dominio de producción en Vercel
-];
-
+// Desactivar CORS completamente (acepta todas las solicitudes de todos los orígenes)
 app.use(cors({
-  origin: function (origin, callback) {
-    console.log(`Incoming request from origin: ${origin}`); // Log para comprobar el origen
-    // Permite solicitudes sin origin (como en postman) o en los dominios permitidos
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.error(`CORS error: Origin not allowed: ${origin}`); // Log de error de CORS
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: 'GET,POST,PUT,DELETE',
-  credentials: true
+  origin: '*', // Permitir todos los orígenes
+  methods: 'GET,POST,PUT,DELETE', // Métodos permitidos
 }));
 
 app.use(express.json()); // Parsear JSON
@@ -59,4 +42,4 @@ app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
 
-export default app; // Exportamos el servidor para Vercel
+export default app;
