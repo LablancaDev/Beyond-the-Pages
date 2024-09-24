@@ -24,6 +24,7 @@ const allowedOrigins = [
 ];
 app.use(cors({
     origin: function (origin, callback) {
+        console.log(`Incoming request from origin: ${origin}`); // Log para comprobar el origen
         // Permite solicitudes sin origin (como en postman) o en los dominios permitidos
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);

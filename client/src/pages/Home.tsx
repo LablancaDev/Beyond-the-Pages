@@ -48,8 +48,19 @@ const Home = () => {
             setFilteredBooks(data); // Inicialmente, todos los libros son filtrados
             console.log("Solicitud a la api correcta!", data);
         } catch (error) {
-            dispatch(fetchBooksFailure("Error fetching books")); // Maneja el error
+           // Manejo del error con verificación de tipo
+        let errorMessage = "Error fetching books";
+        
+        // Verifica si el error es de Axios
+        if (axios.isAxiosError(error)) {
+            // Puedes acceder a error.response aquí
+            errorMessage = error.response?.data?.message || errorMessage; // Ajusta según la estructura de tu respuesta
+            console.error("Error fetching books:", errorMessage);
+        } else {
             console.error("Error fetching books:", error);
+        }
+
+        dispatch(fetchBooksFailure(errorMessage));
         }
 
     };
