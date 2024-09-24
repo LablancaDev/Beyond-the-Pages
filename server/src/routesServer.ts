@@ -31,7 +31,7 @@ router.post('/register', upload.single('profile_image'), registerNewUser);
 router.post('/login', loginUser)
 
 // * Ruta para solicitar los datos de la API de libros
-router.get('/getbooks', getDataBooks) 
+router.get('/getBooks', getDataBooks) 
 
 // * Ruta para agregar los libros a la base de datos
 router.post('/addBooks', addDataBooks)
