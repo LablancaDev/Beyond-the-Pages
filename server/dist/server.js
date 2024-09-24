@@ -21,7 +21,6 @@ app.use((req, res, next) => {
 app.use(cors({
     origin: '*', // Permite todos los orígenes
     methods: 'GET,POST,PUT,DELETE',
-    credentials: true
 }));
 app.use(express.json()); // Parsear JSON
 // Rutas
