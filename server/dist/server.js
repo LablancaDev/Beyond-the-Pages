@@ -17,25 +17,10 @@ app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next();
 });
-// Configuración de CORS
-const allowedOrigins = [
-    'http://localhost:4173', // Tu frontend local en modo desarrollo
-    'https://beyound-the-pages.vercel.app' // Dominio de producción en Vercel
-];
+// Configuración de CORS - Permitimos todos los orígenes temporalmente
 app.use(cors({
-    origin: function (origin, callback) {
-        console.log(`Incoming request from origin: ${origin}`); // Log para comprobar el origen
-        // Permite solicitudes sin origin (como en postman) o en los dominios permitidos
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        }
-        else {
-            console.error(`CORS error: Origin not allowed: ${origin}`); // Log de error de CORS
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: '*', // Permite todos los orígenes
     methods: 'GET,POST,PUT,DELETE',
-    credentials: true
 }));
 app.use(express.json()); // Parsear JSON
 // Rutas
