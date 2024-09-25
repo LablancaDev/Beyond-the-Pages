@@ -41,9 +41,9 @@ const Home = () => {
 
         // Actualiza la carga de libros a True en el estado global
         dispatch(fetchBooksStart())  
-
+                                            //https://beyound-the-pages.vercel.app/books/getBooks?page=1 
         try {
-            const response = await axios.get(`${apiUrl}/books/getBooks?page=${page}`,); // url que apunta a servidor local: `http://localhost:5000/api/books/getBooks?page=${page}`
+            const response = await axios.get(`${apiUrl}/api/books/getBooks?page=${page}`,); // url que apunta a servidor local: `http://localhost:5000/api/books/getBooks?page=${page}`
             const data = response.data;
             dispatch(fetchBooksSuccess(data));
             setFilteredBooks(data); // Inicialmente, todos los libros son filtrados
