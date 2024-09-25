@@ -43,7 +43,7 @@ const Home = () => {
         dispatch(fetchBooksStart())  
                                             //https://beyound-the-pages.vercel.app/books/getBooks?page=1 
         try {
-            const response = await axios.get(`${apiUrl}/api/books/getBooks?page=${page}`,); // url que apunta a servidor local: `http://localhost:5000/api/books/getBooks?page=${page}`
+            const response = await axios.get(`${apiUrl}/books/getBooks?page=${page}`,); // url que apunta a servidor local: `http://localhost:5000/api/books/getBooks?page=${page}`
             const data = response.data;
             dispatch(fetchBooksSuccess(data));
             setFilteredBooks(data); // Inicialmente, todos los libros son filtrados
@@ -124,7 +124,7 @@ const Home = () => {
     const handleAddBook = async (book: Book) => {
         const userId = user_id; // Id del usuario que está logeado para asignar el libro a ese user 
         try {
-            const response = await axios.post(`${apiUrl}/books/addBooks`, { // a server local: "http://localhost:5000/api/books/addBooks"
+            const response = await axios.post(`${apiUrl}/api/books/addBooks`, { // a server local: "http://localhost:5000/api/books/addBooks"
                 userId, // Reemplaza esto con el ID del usuario que está logeado
                 book
                 // IMPORTANTE BOOK CONTIENE LOS DATOS DEL LIBRO, PASAMOS EL ARRAY DE OBJETOS DIRECTAMENTE AL CONTROLADOR, ALLÍ SE EXTRAE LOS DATOS NECESARIOS, COMO EL ID DEL LIBRO

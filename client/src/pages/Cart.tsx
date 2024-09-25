@@ -31,7 +31,7 @@ const Cart = () => {
       if (user_id !== null) { // Me aseguro de que user_id no es null antes de realizar la solicitud
         // probar el if con return,se obtiene el mismo resultado?
         try {
-          const response = await axios.get(`${apiUrl}/books/getBooksFromCart`, { // ruta a servidor local: "http://localhost:5000/api/books/getBooksFromCart"
+          const response = await axios.get(`${apiUrl}/api/books/getBooksFromCart`, { // ruta a servidor local: "http://localhost:5000/api/books/getBooksFromCart"
             params: { userId: user_id }
             /* MUY IMPORTANTE: 
 
@@ -90,7 +90,7 @@ const Cart = () => {
        dispatch(removeFromCart(bookId))
 
        // ELIMINAR LOS LIBROS DE LA DB... 
-        axios.post(`${apiUrl}/books/removeBook`, {
+        axios.post(`${apiUrl}/api/books/removeBook`, {
         bookId,           // id del libro a eliminar
         userId: user_id   // id del usuario logeado, se elimina el libro de su carrito
       })

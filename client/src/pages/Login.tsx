@@ -51,7 +51,7 @@ const Login = () => {
         }
 
         try {
-            await axios.post(`${apiUrl}/users/register`, dataUser, { // ruta servidor local: "http://localhost:5000/api/users/register"
+            await axios.post(`${apiUrl}/api/users/register`, dataUser, { // ruta servidor local: "http://localhost:5000/api/users/register"
                 headers: {
                     'Content-Type': 'multipart/form-data',  //definir siempre para enviar imágenes en la cabecera
                 },
@@ -83,7 +83,7 @@ const Login = () => {
         const userDataLogin = { email, password }
 
         try {
-            const response = await axios.post(`${apiUrl}/users/login`, userDataLogin)
+            const response = await axios.post(`${apiUrl}/api/users/login`, userDataLogin)
 
             console.log("Datos del user devueltos por el servidor: ", response)
 
