@@ -4,21 +4,21 @@ import { Book } from '../redux/types';
 import { RootState } from '../redux/store';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { fetchBooksFailure, fetchBooksStart, fetchBooksSuccess } from '../redux/booksSlice';
+import { fetchBooksFailure, fetchBooksStart, fetchBooksSuccess } from '../redux/booksSlice';  
 import { addToCart } from '../redux/cartSlice';
 import banner from '../assets/img/banner.webp'
 
 
 const Home = () => {
 
-    // Obtener la URL base de la API según el entorno
-    const apiUrl = import.meta.env.MODE === 'production'
-        ? import.meta.env.VITE_APP_API_URL_PRODUCTION
-        : import.meta.env.VITE_APP_API_URL_LOCAL;
+     // Obtener la URL base de la API según el entorno
+     const apiUrl = import.meta.env.MODE === 'production' 
+     ? import.meta.env.VITE_APP_API_URL_PRODUCTION 
+     : import.meta.env.VITE_APP_API_URL_LOCAL; 
 
-    console.log("API URL:", apiUrl);
-    console.log("Variables de entorno:", import.meta.env); // para verificar si las variables de entorno están disponibles y cargadas. SABER EL MODO SI EN PRODUCTION O DESARROLLO
-    console.log(import.meta.env.MODE)
+     console.log("API URL:", apiUrl);
+     console.log("Variables de entorno:", import.meta.env); // para verificar si las variables de entorno están disponibles y cargadas. SABER EL MODO SI EN PRODUCTION O DESARROLLO
+     console.log(import.meta.env.MODE)
 
     // Recuperación de user_id del estado global, necesario para enviarlo al añadir productos y poderlos asocia al id del usuario que inició la sesión 
     const { user_id } = useSelector((state: RootState) => state.auth)
@@ -37,33 +37,31 @@ const Home = () => {
     const [purchasedBooks, setPurchasedBooks] = useState<{ [key: string]: boolean }>({}); //es un objeto que almacena el key del libro en el momento de la compra para mostrar el mensaje
 
     //* Función encargada de obtener todos los libros de la API a través del controlador, la API se consume en el backend. GESTIONA LA CARGA DE LIBROS DESDE LA API
-    const getBooks = async () => {
+    const getBooks = async () => {  
 
         // Actualiza la carga de libros a True en el estado global
-        dispatch(fetchBooksStart())
+        dispatch(fetchBooksStart())  
 
         try {
-            const response = await axios.get(`${apiUrl}/books/getBooks?page=${page}`, // url que apunta a servidor local: `http://localhost:5000/api/books/getBooks?page=${page}`
-                { withCredentials: true } // Asegúrate de que se incluyan las cookies si se utilizan en autenticación
-            );
+            const response = await axios.get(`${apiUrl}/books/getBooks?page=${page}`,); // url que apunta a servidor local: `http://localhost:5000/api/books/getBooks?page=${page}`
             const data = response.data;
             dispatch(fetchBooksSuccess(data));
             setFilteredBooks(data); // Inicialmente, todos los libros son filtrados
             console.log("Solicitud a la api correcta!", data);
         } catch (error) {
-            // Manejo del error con verificación de tipo
-            let errorMessage = "Error fetching books";
+           // Manejo del error con verificación de tipo
+        let errorMessage = "Error fetching books";
+        
+        // Verifica si el error es de Axios
+        if (axios.isAxiosError(error)) {
+            // Puedes acceder a error.response aquí
+            errorMessage = error.response?.data?.message || errorMessage; // Ajusta según la estructura de tu respuesta
+            console.error("Error fetching books:", errorMessage);
+        } else {
+            console.error("Error fetching books:", error);
+        }
 
-            // Verifica si el error es de Axios
-            if (axios.isAxiosError(error)) {
-                // Puedes acceder a error.response aquí
-                errorMessage = error.response?.data?.message || errorMessage; // Ajusta según la estructura de tu respuesta
-                console.error("Error fetching books:", errorMessage);
-            } else {
-                console.error("Error fetching books:", error);
-            }
-
-            dispatch(fetchBooksFailure(errorMessage));
+        dispatch(fetchBooksFailure(errorMessage));
         }
 
     };
@@ -112,12 +110,12 @@ const Home = () => {
             setFilteredBooks(books);
         }
     }
-    // Aquí comprobamos que books es un array antes de intentar mapearlo
-    console.log("Array completo de libros:", Array.isArray(books) ? books : []);
-    console.log("Títulos de libros:", Array.isArray(books) ? books.map(book => book.title) : []);
-    console.log("Categorías de libros:", Array.isArray(books) ? books.map(book => book.category) : []);
-    console.log("Portadas de libros:", Array.isArray(books) ? books.map(book => book.cover) : []);
-    console.log("Categoria seleccionada:", selectCategory);
+  // Aquí comprobamos que books es un array antes de intentar mapearlo
+  console.log("Array completo de libros:", Array.isArray(books) ? books : []);
+  console.log("Títulos de libros:", Array.isArray(books) ? books.map(book => book.title) : []);
+  console.log("Categorías de libros:", Array.isArray(books) ? books.map(book => book.category) : []);
+  console.log("Portadas de libros:", Array.isArray(books) ? books.map(book => book.cover) : []);
+  console.log("Categoria seleccionada:", selectCategory);
 
     // console.log("Libros filtrados por categoría:", filteredBooks)
     console.log(selectCategory)
@@ -131,14 +129,14 @@ const Home = () => {
                 book
                 // IMPORTANTE BOOK CONTIENE LOS DATOS DEL LIBRO, PASAMOS EL ARRAY DE OBJETOS DIRECTAMENTE AL CONTROLADOR, ALLÍ SE EXTRAE LOS DATOS NECESARIOS, COMO EL ID DEL LIBRO
             })
-
+            
             // Actualiza el estado de libros comprados, purchasedBooks que es un objeto donde cada clave es el key del libro y el valor es un booleano que indica si el libro ha sido comprado o no.    
-            const bookKey = book.key; // Cambia esto según el identificador único que uses
-            if (bookKey) {
-                setPurchasedBooks(prev => ({ ...prev, [bookKey]: true }));// Marca este libro como comprado
-            } else {
-                console.error("El libro no tiene una clave válida para marcar como comprado.");
-            }
+             const bookKey = book.key; // Cambia esto según el identificador único que uses
+             if (bookKey) {
+                 setPurchasedBooks(prev => ({ ...prev, [bookKey]: true }));// Marca este libro como comprado
+             } else {
+                 console.error("El libro no tiene una clave válida para marcar como comprado.");
+             } 
 
             //  ES EL ÚNICO DISPATCH AL SLICE DEL CARRITO, EL RESTO ESTÁN EN EL COMPONETE CART PARA ELIMINAR UN PRODUCTO DEL CARRITO O LIMPIAR EL CARRITO
             // Se añade el libro seleccionado al estado global del Carrito

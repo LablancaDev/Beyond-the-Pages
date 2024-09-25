@@ -22,26 +22,9 @@ app.use((req, res, next) => {
     next();
 });
 
-// Define las orígenes permitidos
-const allowedOrigins = [
-    'http://localhost:4173', // Tu frontend local en modo desarrollo
-    'https://beyound-the-pages.vercel.app' // Dominio de producción en Vercel 
-];
-
-// Configuración de CORS
 app.use(cors({
-    origin: function (origin, callback) {
-        console.log(`Incoming request from origin: ${origin}`); // Log para comprobar el origen
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            console.error(`CORS error: Origin not allowed: ${origin}`); // Log de error de CORS
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    methods: 'GET,POST,PUT,DELETE,OPTIONS', // Asegúrate de incluir OPTIONS
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'], // Especifica los encabezados que permitirás
-    credentials: true
+    origin: ['http://localhost:4173', 'https://beyound-the-pages.vercel.app'], // Los orígenes permitidos
+    credentials: true, // Permite el envío de cookies
 }));
 
 app.use(express.json()); // Parsear JSON
