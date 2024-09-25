@@ -6,6 +6,10 @@ a{
 .imageProfile{
   width: 2em;
 }
+.logo{
+  width: 2em;
+  
+}
 /* home */
 .card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;

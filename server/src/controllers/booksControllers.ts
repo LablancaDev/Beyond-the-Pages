@@ -57,6 +57,9 @@ export const addDataBooks = async (req: Request, res: Response) => {
         if (existingBook) {
             // Si ya existe, puedes aumentar la cantidad
             existingBook.quantity += 1;
+            // Actualiza el precio total del libro en función de la nueva cantidad
+            existingBook.price = book.price * existingBook.quantity;
+            
         } else {
             // Si no existe, añade el libro al carrito
             cart.books.push({ bookId: bookId, title: book.title, price: book.price, cover: book.cover, quantity: 1 });

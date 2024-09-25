@@ -51,6 +51,8 @@ export const addDataBooks = (req, res) => __awaiter(void 0, void 0, void 0, func
         if (existingBook) {
             // Si ya existe, puedes aumentar la cantidad
             existingBook.quantity += 1;
+            // Actualiza el precio total del libro en función de la nueva cantidad
+            existingBook.price = book.price * existingBook.quantity;
         }
         else {
             // Si no existe, añade el libro al carrito

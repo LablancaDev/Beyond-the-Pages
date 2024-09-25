@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { RootState, persistor } from '../redux/store'
 import { useDispatch } from 'react-redux'
 import { logout } from '../redux/authSlice'
-
+import imgBook from '../assets/img/book.png'
 
 
 const NavBar = () => {
@@ -26,6 +26,7 @@ const NavBar = () => {
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
+                    <img src={imgBook} alt="logo" className='img-fluid logo me-2' />
                     <a className="navbar-brand" href="#">Beyound the pages</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
