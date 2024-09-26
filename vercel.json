@@ -2,11 +2,11 @@
     "version": 2,
     "builds": [
       {
-        "src": "server/dist/**/*.js",    
+        "src": "server/dist/**/*.js",
         "use": "@vercel/node"
       },
       {
-        "src": "client/package.json",   
+        "src": "client/package.json",
         "use": "@vercel/static-build"
       }
     ],
@@ -18,11 +18,13 @@
       {
         "source": "/(.*)",
         "destination": "/client/dist/index.html"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/client/dist/index.html"
       }
     ]
   }
   
-  
-
 
   
