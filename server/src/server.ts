@@ -23,8 +23,9 @@ app.use((req, res, next) => {
 });
 
 // Define las orígenes permitidos
-const allowedOrigins = [
-    'http://localhost:4173', // Tu frontend local en modo desarrollo
+const allowedOrigins = [    
+    'http://localhost:5173',  // Tu frontend local en modo desarrollo       npm run dev 
+    'http://localhost:4173', // Tu frontend local en modo desarrollo        npm run preview (produccion)
     'https://beyound-the-pages.vercel.app' // Dominio de producción en Vercel
 ];
 
@@ -47,7 +48,7 @@ app.use(cors({
 app.use(express.json()); // Parsear JSON
 
 // Rutas
-app.use('/api/users', routesServer);
+app.use('/api/users', routesServer); 
 app.use('/api/books', routesServer);
 
 // Servir imágenes subidas de forma estática
