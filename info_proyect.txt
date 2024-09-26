@@ -203,3 +203,16 @@ Flujo de Comunicación:
 
 -npm start: Ahora servirá la aplicación en modo de producción. Esto es lo que usarías al desplegar o para simular el entorno de producción.
 
+
+
+## MUY IMPORTANTE PARA PERMITIR ACCESO A MI BASE DE DATOS MONGO DB CUANDO LA API ESTA ALOJADA EN VERCEL ##
+
+    Para permitir que tu aplicación desplegada en Vercel (o cualquier otro servicio de hosting) se conecte correctamente a MongoDB Atlas, debes cambiar 
+    la configuración de acceso en MongoDB de la siguiente manera:
+
+    Permitir conexiones desde cualquier IP:
+
+    En el panel de MongoDB Atlas, ve a la sección de Network Access.
+    Haz clic en Add IP Address.
+    En el cuadro de diálogo, selecciona la opción Allow access from anywhere. Esto añadirá 0.0.0.0/0, lo que permitirá que cualquier dirección IP 
+    (incluidas las direcciones IP de Vercel) se conecte a tu clúster.
