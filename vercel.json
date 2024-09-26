@@ -1,4 +1,15 @@
 {
+    "version": 2,
+    "builds": [
+      {
+        "src": "server/dist/**/*.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "client/package.json",
+        "use": "@vercel/static-build"
+      }
+    ],
     "rewrites": [
       {
         "source": "/api/(.*)",
@@ -8,14 +19,8 @@
         "source": "/(.*)",
         "destination": "/client/dist/index.html"
       }
-    ],
-    "redirects": [
-      {
-        "source": "/404",
-        "destination": "/",
-        "permanent": true
-      }
     ]
   }
   
+
   
