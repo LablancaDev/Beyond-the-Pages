@@ -69,5 +69,15 @@ build/
 # Next.js build output (if you're using Next.js)
 .next/
 
-# Vercel deployments (in case using Vercel)
-.vercel/
+# Vercel deployments (ensure to include vercel.json)
+# .vercel/ will be excluded if needed for local project settings, but keep vercel.json
+.vercel/*
+!vercel.json    # <-- Asegúrate de NO ignorar el archivo de configuración de Vercel
+
+# Ignore server build output if it goes to /server/dist (adjust path if needed)
+server/dist/
+
+# Additional build directories to ignore if necessary
+client/dist/
+
+
