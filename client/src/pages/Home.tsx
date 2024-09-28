@@ -143,12 +143,27 @@ const Home = () => {
                 console.error("El libro no tiene una clave válida para marcar como comprado.");
             }
 
-            // Manejar offCanvas
-            setSelectedBooks((prevSelectedBooks) => [...prevSelectedBooks, book]);
-            setShowOffcanvas(true);
-            if(book.bookId === book.bookId){
-                
+            // Verifica si el libro ya está en selectedBooks
+            const existingBook = selectedBooks.find(item => item.key === book.bookId)
+
+            // Si ya existe, actualiza la cantidad en lugar de añadirlo de nuevo
+            if (existingBook) {
+                // Aquí podrías obtener la nueva cantidad del carrito actualizado desde el response
+                const updatedQuantity = response.data.cart.books.find(item => item.bookId === bookKey)?.quantity || 1;
+                setSelectedBooks((prevSelectedBooks) =>
+                    prevSelectedBooks.map(item =>
+                        
+                        item.key === bookKey ? { ...item, quantity: updatedQuantity } : item
+                    )
+                );
+            } else {
+                // Si no existe, añade el libro al carrito
+                setSelectedBooks((prevSelectedBooks) => [...prevSelectedBooks, { ...book, quantity: 1 }]);
             }
+
+            setShowOffcanvas(true);
+
+
             //  ES EL ÚNICO DISPATCH AL SLICE DEL CARRITO, EL RESTO ESTÁN EN EL COMPONETE CART PARA ELIMINAR UN PRODUCTO DEL CARRITO O LIMPIAR EL CARRITO
             // Se añade el libro seleccionado al estado global del Carrito
             dispatch(addToCart(book))
@@ -255,6 +270,7 @@ const Home = () => {
                                 <img src={book.cover} alt={book.title} className="img-fluid" style={{ height: '100px', width: 'auto' }} />
                                 <h6>{book.title}</h6>
                                 <p>Precio: {book.price} €</p>
+                                <p>{}</p>
                                 <hr />
                             </div>
                         ))

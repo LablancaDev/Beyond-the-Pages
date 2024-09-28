@@ -5,7 +5,7 @@ export interface Book {
     title: string,
     category: string,
     price: number,
-    cover: string
+    cover: string 
 }
 
 // Extensión de la interfaz Book para añadir campos adicionales
