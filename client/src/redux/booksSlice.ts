@@ -1,4 +1,4 @@
-// src/slices/booksSlice.ts
+  // src/slices/booksSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'; // Importa funciones de Redux Toolkit para crear slices y manejar acciones
 import { Book } from './types'; // Importa la interfaz Book que define la estructura de los libros
 

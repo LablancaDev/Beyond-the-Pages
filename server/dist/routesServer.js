@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { loginUser, registerNewUser } from './controllers/authController.js'; // Siempre añadir .js muy importante para la importación con node
 import { addDataBooks, getDataBooks } from './controllers/booksControllers.js';
-import { deleteBook, getDataBooksCart } from './controllers/cartController.js';
+import { cleanAllCart, deleteBook, getDataBooksCart } from './controllers/cartController.js';
 // Simulación de __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,4 +31,6 @@ router.post('/addBooks', addDataBooks);
 router.get('/getBooksFromCart', getDataBooksCart);
 // * Ruta para eliminar un libro de la base de datos
 router.post('/removeBook', deleteBook);
+// * Ruta para limpiar/vaciar el carrito
+router.post('/cleanCart', cleanAllCart);
 export default router;

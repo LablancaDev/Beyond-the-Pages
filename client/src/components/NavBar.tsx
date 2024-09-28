@@ -24,7 +24,7 @@ const NavBar = () => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary position-fixed">
                 <div className="container-fluid">
                     <img src={imgBook} alt="logo" className='img-fluid logo me-2' />
                     <a className="navbar-brand" href="#">Beyound the pages</a>

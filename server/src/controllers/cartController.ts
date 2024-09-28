@@ -76,3 +76,30 @@ export const deleteBook = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Internal server error." });
     }
 };
+
+export const cleanAllCart = async (req: Request, res: Response) => {
+    const { user_id } = req.body;
+
+    try {
+        if (!user_id) {
+            return res.status(400).json({ message: 'No se ha proporcionado el ID del usuario.' });
+        }
+
+         // Encuentra el carrito del usuario
+         const userCart = await Cart.findOne({ userId: user_id });
+
+         if (!userCart) {
+            return res.status(404).json({ message: 'No se encontró un carrito para este usuario.' });
+        }
+
+        // Vaciar el array de libros correctamente usando splice
+        userCart.books.splice(0, userCart.books.length);
+
+         // Guardar el carrito actualizado
+         await userCart.save();
+
+         return res.status(200).json({ message: 'Carrito limpiado correctamente.' });
+    } catch (error) {
+
+    }
+}

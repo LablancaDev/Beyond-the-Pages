@@ -4,21 +4,22 @@ import { Book } from '../redux/types';
 import { RootState } from '../redux/store';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { fetchBooksFailure, fetchBooksStart, fetchBooksSuccess } from '../redux/booksSlice';  
+import { fetchBooksFailure, fetchBooksStart, fetchBooksSuccess } from '../redux/booksSlice';
 import { addToCart } from '../redux/cartSlice';
 import banner from '../assets/img/banner.webp'
+import { Link } from 'react-router-dom';
 
 
 const Home = () => {
 
-     // Obtener la URL base de la API según el entorno
-     const apiUrl = import.meta.env.MODE === 'production' 
-     ? import.meta.env.VITE_APP_API_URL_PRODUCTION 
-     : import.meta.env.VITE_APP_API_URL_LOCAL; 
+    // Obtener la URL base de la API según el entorno
+    const apiUrl = import.meta.env.MODE === 'production'
+        ? import.meta.env.VITE_APP_API_URL_PRODUCTION
+        : import.meta.env.VITE_APP_API_URL_LOCAL;
 
-     console.log("API URL:", apiUrl);
-     console.log("Variables de entorno:", import.meta.env); // para verificar si las variables de entorno están disponibles y cargadas. SABER EL MODO SI EN PRODUCTION O DESARROLLO
-     console.log(import.meta.env.MODE)
+    console.log("API URL:", apiUrl);
+    console.log("Variables de entorno:", import.meta.env); // para verificar si las variables de entorno están disponibles y cargadas. SABER EL MODO SI EN PRODUCTION O DESARROLLO
+    console.log(import.meta.env.MODE)
 
     // Recuperación de user_id del estado global, necesario para enviarlo al añadir productos y poderlos asocia al id del usuario que inició la sesión 
     const { user_id } = useSelector((state: RootState) => state.auth)
@@ -36,12 +37,16 @@ const Home = () => {
     // Estado para rastrear qué libros han sido comprados y mostrar el mensaje (simplemente se encarga de mostrar el mensaje de Comprado! en el libro comprado)
     const [purchasedBooks, setPurchasedBooks] = useState<{ [key: string]: boolean }>({}); //es un objeto que almacena el key del libro en el momento de la compra para mostrar el mensaje
 
+    // Estados para Offcanvas
+    const [showOffcanvas, setShowOffcanvas] = useState(false);
+    const [selectedBooks, setSelectedBooks] = useState<Book[]>([]);
+
     //* Función encargada de obtener todos los libros de la API a través del controlador, la API se consume en el backend. GESTIONA LA CARGA DE LIBROS DESDE LA API
-    const getBooks = async () => {  
+    const getBooks = async () => {
 
         // Actualiza la carga de libros a True en el estado global
-        dispatch(fetchBooksStart())  
-                                             
+        dispatch(fetchBooksStart())
+
         try {                                                                            // url en producción:  https://beyound-the-pages.vercel.app/books/getBooks?page=1
             const response = await axios.get(`${apiUrl}/api/books/getBooks?page=${page}`,); // url que apunta a servidor local: `http://localhost:5000/api/books/getBooks?page=${page}`
             const data = response.data;
@@ -49,19 +54,19 @@ const Home = () => {
             setFilteredBooks(data); // Inicialmente, todos los libros son filtrados
             console.log("Solicitud a la api correcta!", data);
         } catch (error) {
-           // Manejo del error con verificación de tipo
-        let errorMessage = "Error fetching books";
-        
-        // Verifica si el error es de Axios
-        if (axios.isAxiosError(error)) {
-            // Puedes acceder a error.response aquí
-            errorMessage = error.response?.data?.message || errorMessage; // Ajusta según la estructura de tu respuesta
-            console.error("Error fetching books:", errorMessage);
-        } else {
-            console.error("Error fetching books:", error);
-        }
+            // Manejo del error con verificación de tipo
+            let errorMessage = "Error fetching books";
 
-        dispatch(fetchBooksFailure(errorMessage));
+            // Verifica si el error es de Axios
+            if (axios.isAxiosError(error)) {
+                // Puedes acceder a error.response aquí
+                errorMessage = error.response?.data?.message || errorMessage; // Ajusta según la estructura de tu respuesta
+                console.error("Error fetching books:", errorMessage);
+            } else {
+                console.error("Error fetching books:", error);
+            }
+
+            dispatch(fetchBooksFailure(errorMessage));
         }
 
     };
@@ -110,12 +115,12 @@ const Home = () => {
             setFilteredBooks(books);
         }
     }
-  // Aquí comprobamos que books es un array antes de intentar mapearlo
-  console.log("Array completo de libros:", Array.isArray(books) ? books : []);
-  console.log("Títulos de libros:", Array.isArray(books) ? books.map(book => book.title) : []);
-  console.log("Categorías de libros:", Array.isArray(books) ? books.map(book => book.category) : []);
-  console.log("Portadas de libros:", Array.isArray(books) ? books.map(book => book.cover) : []);
-  console.log("Categoria seleccionada:", selectCategory);
+    // Aquí comprobamos que books es un array antes de intentar mapearlo
+    console.log("Array completo de libros:", Array.isArray(books) ? books : []);
+    console.log("Títulos de libros:", Array.isArray(books) ? books.map(book => book.title) : []);
+    console.log("Categorías de libros:", Array.isArray(books) ? books.map(book => book.category) : []);
+    console.log("Portadas de libros:", Array.isArray(books) ? books.map(book => book.cover) : []);
+    console.log("Categoria seleccionada:", selectCategory);
 
     // console.log("Libros filtrados por categoría:", filteredBooks)
     console.log(selectCategory)
@@ -129,15 +134,21 @@ const Home = () => {
                 book
                 // IMPORTANTE BOOK CONTIENE LOS DATOS DEL LIBRO, PASAMOS EL ARRAY DE OBJETOS DIRECTAMENTE AL CONTROLADOR, ALLÍ SE EXTRAE LOS DATOS NECESARIOS, COMO EL ID DEL LIBRO
             })
-            
-            // Actualiza el estado de libros comprados, purchasedBooks que es un objeto donde cada clave es el key del libro y el valor es un booleano que indica si el libro ha sido comprado o no.    
-             const bookKey = book.key; // Cambia esto según el identificador único que uses
-             if (bookKey) {
-                 setPurchasedBooks(prev => ({ ...prev, [bookKey]: true }));// Marca este libro como comprado
-             } else {
-                 console.error("El libro no tiene una clave válida para marcar como comprado.");
-             } 
 
+            // Actualiza el estado de libros comprados, purchasedBooks que es un objeto donde cada clave es el key del libro y el valor es un booleano que indica si el libro ha sido comprado o no.    
+            const bookKey = book.key; // Cambia esto según el identificador único que uses
+            if (bookKey) {
+                setPurchasedBooks(prev => ({ ...prev, [bookKey]: true }));// Marca este libro como comprado
+            } else {
+                console.error("El libro no tiene una clave válida para marcar como comprado.");
+            }
+
+            // Manejar offCanvas
+            setSelectedBooks((prevSelectedBooks) => [...prevSelectedBooks, book]);
+            setShowOffcanvas(true);
+            if(book.bookId === book.bookId){
+                
+            }
             //  ES EL ÚNICO DISPATCH AL SLICE DEL CARRITO, EL RESTO ESTÁN EN EL COMPONETE CART PARA ELIMINAR UN PRODUCTO DEL CARRITO O LIMPIAR EL CARRITO
             // Se añade el libro seleccionado al estado global del Carrito
             dispatch(addToCart(book))
@@ -156,9 +167,9 @@ const Home = () => {
 
     return (
         <div className='container-fluid'>
-            <h1 className='text-center my-4'>Books List</h1>
-            <div className=''>
-                <img className='img-fluid' src={banner} alt="banner" />
+            <h1 className='text-center my-4'>Listado de Libros</h1>
+            <div className='d-flex justify-content-center'>
+                <img className='img-fluid w-100' src={banner} alt="banner" />
             </div>
             <select className='my-3 form-control w-25' onChange={handleCategory}>
                 <option value="">Filtro por Categoría</option>
@@ -204,11 +215,56 @@ const Home = () => {
                                 <button onClick={() => handleAddBook(book)} className='btn btn-success m-2'><i className="bi bi-bag-heart"></i> Añadir</button>
                             </div>
                             {/*se define primero book.key para que no sea undefined antes de intentar acceder a purchasedBooks. */}
-                            {book.key && purchasedBooks[book.key] && <p className='text-primary'>Comprado!</p>} {/* Solo muestra el mensaje si ha sido comprado el libro*/}
+                            {book.key && purchasedBooks[book.key] && <p className='text-primary'>Añadido!</p>} {/* Solo muestra el mensaje si ha sido comprado el libro*/}
                         </div>
                     </div>
                 ))}
             </div>
+
+
+            {/* Offcanvas para mostrar los detalles de los libros seleccionados */}
+            <div
+                className={`offcanvas offcanvas-end ${showOffcanvas ? 'show' : ''}`}
+                tabIndex={-1}
+                style={{
+                    display: showOffcanvas ? 'block' : 'none',
+                    width: '300px', // Cambia el tamaño del offcanvas ajustando el ancho aquí
+                }}
+                aria-labelledby="offcanvasLabel"
+            >
+                <div className="offcanvas-header flex-column">
+                    <div className='d-flex justify-content-between align-items-center w-100'>
+                        <h5 id="offcanvasLabel">Carrito de Compras</h5>
+                        <button type="button" className="btn-close" onClick={() => setShowOffcanvas(false)}></button>
+                    </div>
+                    <div className='my-3 w-100'>
+                        <Link to={"/cart"}>
+                            <button className='btn btn-success'>Mi Carrito <i className="bi bi-cart3"></i></button>
+                        </Link>
+                    </div>
+                </div>
+                <div className="offcanvas-body"
+                    style={{
+                        overflowY: 'auto', // Permite el scroll vertical
+                        maxHeight: 'calc(100vh - 100px)', // Altura máxima para no salir de la pantalla
+                    }}
+                >
+                    {selectedBooks.length > 0 ? (
+                        selectedBooks.map((book, index) => (
+                            <div key={index} className="mb-3">
+                                <img src={book.cover} alt={book.title} className="img-fluid" style={{ height: '100px', width: 'auto' }} />
+                                <h6>{book.title}</h6>
+                                <p>Precio: {book.price} €</p>
+                                <hr />
+                            </div>
+                        ))
+                    ) : (
+                        <p>No hay libros en el carrito.</p>
+                    )}
+                </div>
+            </div>
+
+
             <div className='d-flex justify-content-between my-4'>
                 <button className='btn btn-secondary' onClick={() => setPage(page - 1)} disabled={page === 1}>
                     Previous
