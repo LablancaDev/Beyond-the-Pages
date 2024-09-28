@@ -149,7 +149,7 @@ const Home = () => {
             // Si ya existe, actualiza la cantidad en lugar de añadirlo de nuevo
             if (existingBook) {
                 // Aquí podrías obtener la nueva cantidad del carrito actualizado desde el response
-                const updatedQuantity = response.data.cart.books.find(item => item.bookId === bookKey)?.quantity || 1;
+                const updatedQuantity = response.data.cart.books.find((item: {bookId: string}) => item.bookId === bookKey)?.quantity || 1;
                 setSelectedBooks((prevSelectedBooks) =>
                     prevSelectedBooks.map(item =>
                         

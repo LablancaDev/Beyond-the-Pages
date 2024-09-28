@@ -6,7 +6,7 @@ import { CartBook } from '../redux/types'
 import { useDispatch } from 'react-redux'
 import { clearCart, removeFromCart } from '../redux/cartSlice'
 import oferta from '../assets/img/oferta.jpg'
-import { response } from 'express'
+// import { response } from 'express'
 
 const Cart = () => {
 
