@@ -16,6 +16,9 @@ a {
 .logo {
   width: 2em;
 }
+.userName{
+  color:rgb(0, 77, 67);
+}
 
 /* home */
 .home{

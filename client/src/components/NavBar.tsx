@@ -24,7 +24,7 @@ const NavBar = () => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary position-fixed">
+            <nav className="navbar navbar-expand-lg bg-body-secondary position-fixed">
                 <div className="container-fluid">
                     <img src={imgBook} alt="logo" className='img-fluid logo me-2' />
                     <a className="navbar-brand" href="#">Beyound the pages</a>
@@ -73,7 +73,7 @@ const NavBar = () => {
                                     <li><a onClick={log_out} className="dropdown-item" href="#">Log out</a></li>
                                 </ul>
                             </div>
-                            <div className='text-primary'>{userName}</div>
+                            <div className='userName'>{userName}</div>
                             {profileImage &&
                                 <img className='img-fluid imageProfile' src={`http://localhost:5000/uploads/${profileImage}`} alt="profile image" />
                             }
