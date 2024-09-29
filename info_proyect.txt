@@ -216,3 +216,37 @@ Flujo de Comunicación:
     Haz clic en Add IP Address.
     En el cuadro de diálogo, selecciona la opción Allow access from anywhere. Esto añadirá 0.0.0.0/0, lo que permitirá que cualquier dirección IP 
     (incluidas las direcciones IP de Vercel) se conecte a tu clúster.
+
+
+    
+<!-- name_proyect
+  /client  
+    /dist
+      /assets
+    index.html  
+    /node_modules
+    /public
+      index.html
+    /src
+      /assets  
+      /components  
+      /pages  
+      /redux
+      /routes
+    App.tsx
+    main.tsx
+    package.json
+    ...
+  /server
+    /dist
+    /node_modules
+    /src
+      -config
+      -controllers
+      -models
+      -services
+  vercel.json
+
+
+-->
+    
