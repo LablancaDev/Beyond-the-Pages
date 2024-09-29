@@ -68,6 +68,6 @@ h1 {
   background: linear-gradient(rgb(105, 105, 105), rgb(204, 204, 204));
 }
 /* offCanvas */
-.offcanvas-header{
-  background-color: #cfe6ff;
+.offcanvas-header, .offcanvas-footer{
+  background-color:rgb(0, 77, 67);
 }

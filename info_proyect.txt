@@ -195,7 +195,7 @@ Flujo de Comunicación:
   "lint": "eslint ."
 }
 
--npm run dev: Ejecuta un servidor de desarrollo local con recarga en caliente y herramientas de depuración.
+-npm run dev: Ejecuta un servidor de desarrollo local con recarga en caliente y herramientas de depuración, para trabajar en el proyecto(development mode).
 
 -npm run preview: Será útil cuando desees previsualizar la producción localmente antes de desplegarla.
 

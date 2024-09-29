@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Book } from '../redux/types';
+import { Book, CartBook } from '../redux/types';
 import { RootState } from '../redux/store';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -39,7 +39,7 @@ const Home = () => {
 
     // Estados para Offcanvas
     const [showOffcanvas, setShowOffcanvas] = useState(false);
-    const [selectedBooks, setSelectedBooks] = useState<Book[]>([]);
+    const [selectedBooks, setSelectedBooks] = useState<CartBook[]>([]);
 
     //* Función encargada de obtener todos los libros de la API a través del controlador, la API se consume en el backend. GESTIONA LA CARGA DE LIBROS DESDE LA API
     const getBooks = async () => {
@@ -143,22 +143,25 @@ const Home = () => {
                 console.error("El libro no tiene una clave válida para marcar como comprado.");
             }
 
-            // Verifica si el libro ya está en selectedBooks
-            const existingBook = selectedBooks.find(item => item.key === book.bookId)
+            // Verifica si el libro ya está en selectedBooks  
+            const existingBook = selectedBooks.find(item => item.key === book.key)
 
-            // Si ya existe, actualiza la cantidad en lugar de añadirlo de nuevo
+            // Si ya existe, actualiza la cantidad en lugar de añadirlo de nuevo 
             if (existingBook) {
-                // Aquí podrías obtener la nueva cantidad del carrito actualizado desde el response
-                const updatedQuantity = response.data.cart.books.find((item: {bookId: string}) => item.bookId === bookKey)?.quantity || 1;
-                setSelectedBooks((prevSelectedBooks) =>
+                // Si ya existe, actualiza la cantidad sumando la existente +1
+                const updatedQuantity = existingBook.quantity + 1;
+
+                // Actualiza la cantidad en el estado selectedBooks
+                setSelectedBooks(prevSelectedBooks =>
                     prevSelectedBooks.map(item =>
-                        
-                        item.key === bookKey ? { ...item, quantity: updatedQuantity } : item
+                        item.bookId === book.bookId ? { ...item, quantity: updatedQuantity } : item
                     )
                 );
             } else {
-                // Si no existe, añade el libro al carrito
-                setSelectedBooks((prevSelectedBooks) => [...prevSelectedBooks, { ...book, quantity: 1 }]);
+                // Si no existe, añade el libro como CartBook con quantity inicial de 1
+                const newCartBook: CartBook = { ...book, quantity: 1 }; // Conversión de Book a CartBook
+
+                setSelectedBooks(prevSelectedBooks => [...prevSelectedBooks, newCartBook]);
             }
 
             setShowOffcanvas(true);
@@ -166,7 +169,8 @@ const Home = () => {
 
             //  ES EL ÚNICO DISPATCH AL SLICE DEL CARRITO, EL RESTO ESTÁN EN EL COMPONETE CART PARA ELIMINAR UN PRODUCTO DEL CARRITO O LIMPIAR EL CARRITO
             // Se añade el libro seleccionado al estado global del Carrito
-            dispatch(addToCart(book))
+            const newCartBook: CartBook = { ...book, quantity: 1 };
+            dispatch(addToCart(newCartBook));
 
             console.log("Libro añadido al carrito:", response.data);
         } catch (error) {
@@ -175,6 +179,10 @@ const Home = () => {
         }
         console.log("Click del id del libro que se pasa al controller:", book.key)
     }
+
+    // Calcular el total de la cantidad de libros en el carrito
+    const totalQuantity = selectedBooks.reduce((total, book) => total + book.quantity, 0);
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -247,17 +255,14 @@ const Home = () => {
                 }}
                 aria-labelledby="offcanvasLabel"
             >
-                <div className="offcanvas-header flex-column">
+                <div className="offcanvas-header flex-column text-light">
                     <div className='d-flex justify-content-between align-items-center w-100'>
-                        <h5 id="offcanvasLabel">Carrito de Compras</h5>
+                        <h5 id="offcanvasLabel">Carrito de Compras <i className="bi bi-cart3"></i></h5>
                         <button type="button" className="btn-close" onClick={() => setShowOffcanvas(false)}></button>
                     </div>
-                    <div className='my-3 w-100'>
-                        <Link to={"/cart"}>
-                            <button className='btn btn-success'>Mi Carrito <i className="bi bi-cart3"></i></button>
-                        </Link>
-                    </div>
+
                 </div>
+                {/* body Offcanvas */}
                 <div className="offcanvas-body"
                     style={{
                         overflowY: 'auto', // Permite el scroll vertical
@@ -269,14 +274,32 @@ const Home = () => {
                             <div key={index} className="mb-3">
                                 <img src={book.cover} alt={book.title} className="img-fluid" style={{ height: '100px', width: 'auto' }} />
                                 <h6>{book.title}</h6>
-                                <p>Precio: {book.price} €</p>
-                                <p>{}</p>
+                                <p>Precio: <span className='text-danger'>{book.price} €</span></p>
                                 <hr />
                             </div>
                         ))
                     ) : (
                         <p>No hay libros en el carrito.</p>
                     )}
+                </div>
+                {/* Footer del Offcanvas */}
+                <div
+                    className="offcanvas-footer text-light"
+                    style={{
+                        padding: '10px 20px',
+                        borderTop: '1px solid #dee2e6',
+                        position: 'sticky',
+                        bottom: 0,
+                        zIndex: 1,
+                    }}
+                >
+                    <h5>Total de Libros: <span className='text-danger'>{totalQuantity} unidades</span></h5>
+                    <div className='my-3 w-100'>
+                        <Link to={"/cart"}>
+                            <button className='btn btn-success'>Mi Carrito <i className="bi bi-cart-check-fill"></i></button>
+                        </Link>
+                    </div>
+                
                 </div>
             </div>
 
