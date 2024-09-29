@@ -1,25 +1,26 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "server/dist/**/*.js",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "client/package.json",
-        "use": "@vercel/static-build"
+  "version": 2,
+  "builds": [
+    {
+      "src": "server/dist/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "client/dist"
       }
-    ],
-    "rewrites": [
-      {
-        "source": "/api/(.*)",
-        "destination": "/server/dist/server.js"
-      },
-      {
-        "source": "/(.*)",
-        "destination": "/index.html"
-      }
-    ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/server/dist/server.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/client/dist/index.html"
+    }
+  ]
 }
-  
-
