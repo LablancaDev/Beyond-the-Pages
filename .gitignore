@@ -6,8 +6,7 @@ logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
-
+ 
 # Runtime data
 pids/
 *.pid
@@ -30,26 +29,28 @@ coverage/
 bower_components/
 
 # Compiled source files
-# Ignorar la carpeta build de manera general
-# build/
+build/
 
-# Ignorar el output del servidor si se genera en /server/dist
-# Permitir la carpeta dist del cliente y el servidor
-# Pero ignorar el contenido específico no necesario dentro de dist
-dist/*
-!dist/assets/ # Permitir subir la carpeta assets
-!dist/index.html # Permitir subir index.html
+# Optional npm cache directory
+.npm/
 
-# Ignorar la carpeta del servidor dist
-server/dist/
-!server/dist/** # Permitir que se suba el contenido del servidor dist
+# Optional eslint cache
+.eslintcache
 
-# Ignorar archivos de entorno
+# Optional REPL history
+.node_repl_history
+
+# dotenv environment variables file
 .env
-.env.*   # Para archivos .env específicos de cada entorno
+.env.*   # For environment-specific .env files like .env.production or .env.local
+
+# VSCode settings (if you're using Visual Studio Code)
+.vscode/
+
+# MacOS files
+.DS_Store
 
 # IDE specific
-.vscode/
 .idea/
 *.suo
 *.ntvs*
@@ -66,14 +67,20 @@ server/dist/
 # Next.js build output (if you're using Next.js)
 .next/
 
-# Vercel deployments (asegúrate de incluir vercel.json)
-# .vercel/ se excluirá si es necesario para la configuración local, pero mantén vercel.json
+# Vercel deployments (ensure to include vercel.json)
+# .vercel/ will be excluded if needed for local project settings, but keep vercel.json
 .vercel/*
 !vercel.json    # <-- Asegúrate de NO ignorar el archivo de configuración de Vercel
 
-# Ignore server build output if it goes to /server/dist (ajusta la ruta si es necesario)
-# No necesitamos ignorar las carpetas dist aquí ya que son necesarias para el despliegue
-# server/dist/
+# Ignore server build output if it goes to /server/dist (adjust path if needed)
+server/dist/
+
+# Ignore dist folder in the root of the project
+dist/
+
+# Do not ignore client dist folder
+!/client/dist/
+
 
 
 
