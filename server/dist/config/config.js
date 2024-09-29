@@ -20,7 +20,9 @@ const __dirname = dirname(__filename);
 dotenv.config({ path: resolve(__dirname, '../../../.env') });
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose.connect(process.env.MONGO_URI || '', {});
+        yield mongoose.connect(process.env.MONGO_URI || '', {
+            serverSelectionTimeoutMS: 5000
+        });
         console.log('MongoDB conectado...');
     }
     catch (error) {
