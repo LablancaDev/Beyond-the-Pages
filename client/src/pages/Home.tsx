@@ -191,7 +191,7 @@ const Home = () => {
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <div className='container-fluid'>
+        <div className='container-fluid home'>
             <h1 className='text-center my-4'>Listado de Libros</h1>
             <div className='d-flex justify-content-center'>
                 <img className='img-fluid w-100' src={banner} alt="banner" />
