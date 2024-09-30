@@ -48,7 +48,7 @@ const Home = () => {
         // Actualiza la carga de libros a True en el estado global
         dispatch(fetchBooksStart())
 
-        try {                                                                            // url en producción:  https://beyond-the-pages-black.vercel.app/api/books/getBooks?page=1
+        try {                                                                            // url en producción:  https://beyond-the-pages-ten.vercel.app/api/books/getBooks?page=1
             const response = await axios.get(`${apiUrl}/api/books/getBooks?page=${page}`,); // url que apunta a servidor local: `http://localhost:5000/api/books/getBooks?page=${page}`
             const data = response.data;
             dispatch(fetchBooksSuccess(data));
