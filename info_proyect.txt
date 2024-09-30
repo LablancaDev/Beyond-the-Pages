@@ -222,6 +222,8 @@ Flujo de Comunicación:
 <!-- name_proyect
   /client  
     /dist
+        index...css
+        index...js
       /assets
     index.html  
     /node_modules
