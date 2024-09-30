@@ -11,16 +11,16 @@
   ],
   "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/server/dist/server.js"
+      "src": "/api/(.*)",
+      "dest": "/server/dist/server.js"
     },
     {
-      "source": "/assets/(.*)",
-      "destination": "/client/dist/assets/$1"
+      "src": "/assets/(.*)",
+      "dest": "/client/dist/assets/$1"
     },
     {
-      "source": "/(.*)",
-      "destination": "/client/dist/index.html"
+      "src": "/(.*)",
+      "dest": "/client/dist/index.html"
     }
   ]
 }
