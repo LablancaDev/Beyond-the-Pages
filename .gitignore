@@ -1,0 +1,2 @@
+# Excluir la carpeta dist de ser ignorada (al incluirlo directamente añade de nuevo los archivos (de letra sombreada a normal))
+!client/dist/
