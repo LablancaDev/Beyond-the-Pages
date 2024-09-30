@@ -16,27 +16,12 @@ app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next();
 });
-// Define las orígenes permitidos
-const allowedOrigins = [
-    'http://localhost:5173', // Tu frontend local en modo desarrollo       npm run dev 
-    'http://localhost:4173', // Tu frontend local en modo desarrollo        npm run preview (produccion)
-    'https://beyond-the-pages-black.vercel.app' // Dominio de producción en Vercel
-];
-// Configuración de CORS
+// Configuración de CORS para permitir cualquier origen
 app.use(cors({
-    origin: function (origin, callback) {
-        console.log(`Incoming request from origin: ${origin}`); // Log para comprobar el origen
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        }
-        else {
-            console.error(`CORS error: Origin not allowed: ${origin}`); // Log de error de CORS
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: '*', // Permitir cualquier origen
     methods: 'GET,POST,PUT,DELETE,OPTIONS', // Asegúrate de incluir OPTIONS
     allowedHeaders: ['Content-Type', 'Authorization'], // Especifica los encabezados que permitirás
-    credentials: true
+    credentials: true // Si usas cookies o autorizaciones
 }));
 app.use(express.json()); // Parsear JSON
 // Rutas
@@ -48,4 +33,4 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
-export default app; // Exportamos el servidor para Vercel
+export default app;
