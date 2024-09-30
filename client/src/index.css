@@ -74,3 +74,12 @@ h1 {
 .offcanvas-header, .offcanvas-footer{
   background-color:rgb(0, 77, 67);
 }
+/* login */
+.login{
+  margin-top: 5em;
+}
+/* profile */
+.profile-container{
+  margin-top: 10em;
+}
+

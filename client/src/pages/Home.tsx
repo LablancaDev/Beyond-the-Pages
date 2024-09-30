@@ -156,7 +156,7 @@ const Home = () => {
                 // Actualiza la cantidad en el estado selectedBooks
                 setSelectedBooks(prevSelectedBooks =>
                     prevSelectedBooks.map(item =>
-                        item.bookId === book.bookId ? { ...item, quantity: updatedQuantity } : item
+                        item.key === book.key ? { ...item, quantity: updatedQuantity } : item
                     )
                 );
             } else {

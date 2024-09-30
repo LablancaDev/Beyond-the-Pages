@@ -27,7 +27,7 @@ const NavBar = () => {
             <nav className="navbar navbar-expand-lg bg-body-secondary position-fixed">
                 <div className="container-fluid">
                     <img src={imgBook} alt="logo" className='img-fluid logo me-2' />
-                    <a className="navbar-brand" href="#">Beyound the pages</a>
+                    <a className="navbar-brand" href="#">Beyond the pages</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -68,7 +68,9 @@ const NavBar = () => {
                                     <Link to={"/login"}>
                                         <li><a className="dropdown-item" href="#">Login</a></li>
                                     </Link>
-                                    <li><a className="dropdown-item" href="#">My profile</a></li>
+                                    <Link to={"/profile"}>
+                                        <li><a className="dropdown-item" href="#">My profile</a></li>
+                                    </Link>
                                     <li><hr className="dropdown-divider" /></li>
                                     <li><a onClick={log_out} className="dropdown-item" href="#">Log out</a></li>
                                 </ul>

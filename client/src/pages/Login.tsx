@@ -120,7 +120,7 @@ const Login = () => {
     return (
         <div className="container-fluid py-5">
             <div className="row">
-                <div className="col">
+                <div className="col login">
                     <form action="" onSubmit={changeRegisterLogin ? handleRegister : handleLogin}>
                         <div className="card w-50 m-auto p-4">
                             <h3 className='text-center my-4'>{changeRegisterLogin ? 'Register' : 'Login'}</h3>
