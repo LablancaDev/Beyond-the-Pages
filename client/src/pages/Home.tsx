@@ -20,6 +20,7 @@ const Home = () => {
     console.log("API URL:", apiUrl);
     console.log("Variables de entorno:", import.meta.env); // para verificar si las variables de entorno están disponibles y cargadas. SABER EL MODO SI EN PRODUCTION O DESARROLLO
     console.log(import.meta.env.MODE)
+    console.log(`Contrucción de la API URL: ${apiUrl}/api/books/getBooks?page=$page`);
 
     // Recuperación de user_id del estado global, necesario para enviarlo al añadir productos y poderlos asocia al id del usuario que inició la sesión 
     const { user_id } = useSelector((state: RootState) => state.auth)
@@ -70,12 +71,13 @@ const Home = () => {
         }
 
     };
-
+    
+    
     // Lamada a la function que se encarga de obtener los libros de la API cuando carga el componente
     useEffect(() => {
         getBooks();
     }, [page]); // Vuelve a llamar a la API cuando cambie la página
-
+    
 
     // Maneja el cambio en el input de búsqueda
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
