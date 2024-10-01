@@ -8,4 +8,5 @@
 !client/dist/assets/
 !client/dist/assets/**
 
-.vercel
+# El archivo .vercel es un directorio creado por la CLI de Vercel (Vercel CLI) que contiene la configuración y la información necesaria para que Vercel pueda gestionar y desplegar tu proyecto. 
+!.vercel

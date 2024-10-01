@@ -299,3 +299,13 @@ Vercel CLI 37.6.0
 ✅  Production: https://beyond-the-pages-leqigj3o5-davids-projects-5a52dd2e.vercel.app [5s]
 PS C:\Users\David\Desktop\Proyectos personales con React\beyound_the_pages\client>
 
+Comandos de Vercel CLI
+Al ejecutar comandos de Vercel como vercel o vercel --prod, la CLI genera y utiliza el directorio .vercel para gestionar tu proyecto. Aquí hay un resumen de algunos comandos comunes:
+
+vercel: Despliega tu aplicación y crea una nueva URL para el entorno de previsualización.
+vercel --prod: Despliega tu aplicación en producción, actualizando la URL de producción.
+
+
+
+*nota: Esto es porque el frontend (donde haces las solicitudes) está corriendo 
+en https://beyond-the-pages-leqigj3o5-davids-projects-5a52dd2e.vercel.app y el backend (la API) está en https://beyond-the-pages-three.vercel.app.
