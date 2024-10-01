@@ -3,5 +3,7 @@
 !client/dist/**
 
 # No ignorar la carpeta assets y su contenido
+!client/dist/
+!client/dist/**
 !client/dist/assets/
 !client/dist/assets/**

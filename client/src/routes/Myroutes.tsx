@@ -6,6 +6,7 @@ import Profile from '../pages/Profile'
 
 const Myroutes = () => {
   return (
+    
     <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/home' element={<Home />}/>
@@ -14,7 +15,7 @@ const Myroutes = () => {
         <Route path='/profile' element={<Profile />}/>
         <Route path='*' element={<Home />} /> 
     </Routes>
-  )
+  );
 }
 
 export default Myroutes

@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 const allowedOrigins = [    
     'http://localhost:5173',  // Tu frontend local en modo desarrollo       npm run dev 
     'http://localhost:4173', // Tu frontend local en modo desarrollo        npm run preview (produccion)
-    'https://beyond-the-pages-ten.vercel.app' // Dominio de producción en Vercel
+    'https://beyond-the-pages-three.vercel.app' // Dominio de producción en Vercel
 ];
 
 // Configuración de CORS
