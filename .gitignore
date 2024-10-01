@@ -12,3 +12,4 @@
 # Esto asegura que Vercel gestione correctamente el despliegue
 # No ignorar el directorio .vercel dentro de client y todo su contenido
 
+.vercel
