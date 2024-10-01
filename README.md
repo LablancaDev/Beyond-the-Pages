@@ -4,7 +4,7 @@ Este proyecto es una tienda online que permite a los usuarios buscar, comprar y 
 
 ## Ver el Proyecto
 
-Puedes ver el proyecto desplegado en [este enlace](https://beyound-the-pages.vercel.app/).
+Puedes ver el proyecto desplegado en [este enlace](https://beyond-the-pages-kporvhnyh-davids-projects-5a52dd2e.vercel.app/). 
 
 ## Estado del Proyecto
 
