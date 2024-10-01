@@ -21,7 +21,7 @@ const allowedOrigins = [
     'http://localhost:5173', // Tu frontend local en modo desarrollo       npm run dev 
     'http://localhost:4173', // Tu frontend local en modo producción        npm run preview
     'http://127.0.0.1:5500', // Origen local que está causando problemas (añadido aquí)
-    'https://beyond-the-pages-lovat.vercel.app/',
+    'https://beyond-the-pages-seven.vercel.app/',
 ];
 // Configuración de CORS
 app.use(cors({
