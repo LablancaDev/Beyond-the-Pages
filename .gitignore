@@ -8,3 +8,4 @@
 !client/dist/assets/
 !client/dist/assets/**
 
+.vercel

@@ -252,3 +252,50 @@ Flujo de Comunicación:
 
 -->
     
+
+    ##MUY IMPORTANTE PARA PODER DESPLEGAR EL PROYECTO BACKEND A PRODUCCION##
+
+*Captura de la terminal de VSC
+
+    PS C:\Users\David\Desktop\Proyectos personales con React\beyound_the_pages\client> npm install
+
+up to date, audited 198 packages in 7s
+
+43 packages are looking for funding
+
+1 high severity vulnerability
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+PS C:\Users\David\Desktop\Proyectos personales con React\beyound_the_pages\client> npm audit
+# npm audit report
+
+rollup  4.0.0 - 4.22.3
+Severity: high
+fix available via `npm audit fix`
+node_modules/rollup
+
+1 high severity vulnerability
+
+To address all issues, run:
+  npm audit fix
+
+changed 3 packages, and audited 198 packages in 5s
+
+43 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS C:\Users\David\Desktop\Proyectos personales con React\beyound_the_pages\client> vercel --prod
+Vercel CLI 37.6.0
+? Set up and deploy “~\Desktop\Proyectos personales con React\beyound_the_pages\client”? yes
+? Which scope do you want to deploy to? David's projects
+? Link to existing project? yes
+? What’s the name of your existing project? beyond-the-pages
+🔗  Linked to davids-projects-5a52dd2e/beyond-the-pages (created .vercel and added it to .gitignore)
+🔍  Inspect: https://vercel.com/davids-projects-5a52dd2e/beyond-the-pages/4ZgxkgMrG66MSj2WQrrMBMg5DevX [5s]
+✅  Production: https://beyond-the-pages-leqigj3o5-davids-projects-5a52dd2e.vercel.app [5s]
+PS C:\Users\David\Desktop\Proyectos personales con React\beyound_the_pages\client>
+
