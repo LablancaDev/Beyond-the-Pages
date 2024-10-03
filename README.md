@@ -5,7 +5,13 @@ Este proyecto es una librería online que permite a los usuarios explorar, selec
 
 ## Ver el Proyecto
 
+<<<<<<< HEAD
 Puedes ver la versión actual del proyecto desplegado en [Beyond the Pages](https://beyond-the-pages-kporvhnyh-davids-projects-5a52dd2e.vercel.app/).
+||||||| 914e235
+Puedes ver el proyecto desplegado en [este enlace](https://beyound-the-pages.vercel.app/).
+=======
+Puedes ver el proyecto desplegado en [este enlace](https://beyond-the-pages-kporvhnyh-davids-projects-5a52dd2e.vercel.app/). 
+>>>>>>> 1711d05abce4b06ceda8f19863e617ea4eab61e9
 
 ## Estado del Proyecto
 
