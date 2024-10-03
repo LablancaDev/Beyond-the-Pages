@@ -369,3 +369,12 @@ Una vez que estés satisfecho con la vista previa y todo esté funcionando corre
 - **Mantenimiento**: Después del despliegue, recuerda que puedes hacer cambios en tu código, y luego puedes volver a ejecutar `vercel` o `vercel --prod` para desplegar nuevas versiones.
 
 Si todo se ve bien y funciona correctamente, ¡tu aplicación debería estar en vivo! Si tienes más preguntas o necesitas más ayuda, no dudes en preguntar.
+
+
+## ÚLTIMO DESPLIEGUE EN VERCEL ##
+
+PS C:\Users\David\Desktop\Proyectos personales con React\beyound_the_pages\client> vercel --prod        
+Vercel CLI 37.6.0
+🔍  Inspect: https://vercel.com/davids-projects-5a52dd2e/beyond-the-pages/7Pewf2ThTLoaxr4zYsJq7sFPNndV [2s]
+✅  Production: https://beyond-the-pages-kporvhnyh-davids-projects-5a52dd2e.vercel.app [2s]
+PS C:\Users\David\Desktop\Proyectos personales con React\beyound_the_pages\client> 

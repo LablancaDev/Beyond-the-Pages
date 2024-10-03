@@ -8,5 +8,8 @@
 !client/dist/assets/
 !client/dist/assets/**
 
+# Ignorar archivos .env en cualquier carpeta
+*.env
 
-ver
+# Ignorar archivos .txt en cualquier carpeta
+*.txt
