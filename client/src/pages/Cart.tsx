@@ -6,9 +6,14 @@ import { CartBook } from '../redux/types'
 import { useDispatch } from 'react-redux'
 import { clearCart, removeFromCart } from '../redux/cartSlice'
 import oferta from '../assets/img/oferta.jpg'
-// import { response } from 'express'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable';
+import logo from '../assets/img/logo.png'
+import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
+
+  const navigate = useNavigate()
 
   // Obtener la URL base de la API según el entorno
   const apiUrl = import.meta.env.MODE === 'production' 
@@ -139,14 +144,67 @@ const Cart = () => {
   const quantityTotal = booksCart.reduce((total, book)=> total + book.quantity, 0)
   const priceTotal = booksCart.reduce((total, book) => total + book.quantity * book.price ,0).toFixed(2)
 
+  
+
+  // * Implementación descarga de archivo PDF de las compras realizadas (factura)
+
+  const finalizePurchase = () => {
+    
+    const doc = new jsPDF()
+
+    // Logo de la empresa 
+    const logoUrl = logo;   
+    
+    // Agregar el logo  
+    doc.addImage(logoUrl, 'JPEG', 10, 10, 50, 20); // Posición del logo 
+
+    // Título del PDF
+    doc.setFontSize(20);
+    doc.text('Detalles de la compra', 10, 50);
+
+     // Tabla con los detalles del carrito
+     const tableColumn = ['Título', 'Cantidad', 'Precio Unitario (€)', 'Precio Total (€)'];
+     const tableRows: any[] = [];
+
+     booksCart.forEach((book) => {
+      const bookData = [
+        book.title,
+        book.quantity,
+        book.price.toFixed(2),
+        (book.quantity * book.price).toFixed(2),
+      ];
+      tableRows.push(bookData);
+    });
+
+     // Calcular el total general
+     const totalPrice = booksCart.reduce((total, book) => total + book.quantity * book.price, 0).toFixed(2);
+
+     // Agregar tabla al PDF
+     doc.autoTable({
+       head: [tableColumn],
+       body: tableRows,
+       startY: 60,
+     });
+ 
+     // Mostrar el total general
+     doc.setFontSize(16); 
+     doc.text(`Total: ${totalPrice} €`, 10, doc.lastAutoTable.finalY + 10);
+ 
+     // Descargar el PDF
+     doc.save('resumen_compra.pdf');
+
+     navigate('/purchaseComplete')
+
+  }
+
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid back-cart">
       <h1 className='text-center my-4'>Mi Carrito</h1>
-      <div className='d-flex justify-content-center'>
+      <div className='d-flex justify-content-center mt-5'>
         <img className='img-fluid m-auto w-75' src={oferta} alt="oferta" />
       </div>
-      <div className='border rounded w-50 m-auto my-4 py-2 cart'>
+      <div className='border rounded w-75 m-auto my-4 py-2 cart'>
       <h4 className='mb-4 text-center'>Mis Compras</h4>
         <div className=' w-75 m-auto d-flex justify-content-between align-items-center'>
           <div>
@@ -156,14 +214,14 @@ const Cart = () => {
           </div>
           <div className='d-flex flex-column gap-2'>
             <button onClick={clearMyCart} className='btn btn-warning'>Vaciar Carrito</button>
-            <button className='btn btn-success'>Finalizar Compra</button>
+            <button onClick={finalizePurchase} className='btn btn-success'>Finalizar Compra</button>
           </div>
         </div>
       </div>
       <div className="row">
           {booksCart.map((book, index)=>(
         <div className="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mb-4 ">
-            <div className='card w-100' style={{ maxHeight: '450px' }} key={index}>
+            <div className='card w-100 back-card' style={{ maxHeight: '450px' }} key={index}>
               <img className='w-100 img-fluid' src={book.cover} style={{ height: '200px', objectFit: 'cover' }} alt="" />
               <div className="card-body">
                 <h6 className='card-title text-center' style={{ minHeight: '50px' }}>{book.title}</h6>

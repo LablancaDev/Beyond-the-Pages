@@ -71,13 +71,13 @@ const Home = () => {
         }
 
     };
-    
-    
+
+
     // Lamada a la function que se encarga de obtener los libros de la API cuando carga el componente
     useEffect(() => {
         getBooks();
     }, [page]); // Vuelve a llamar a la API cuando cambie la página
-    
+
 
     // Maneja el cambio en el input de búsqueda
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -193,36 +193,38 @@ const Home = () => {
     return (
         <div className='container-fluid home'>
             <h1 className='text-center my-4'>Listado de Libros</h1>
-            <div className='d-flex justify-content-center'>
+            <div className='d-flex justify-content-center mt-5'>
                 <img className='img-fluid w-100' src={banner} alt="banner" />
             </div>
-            <select className='my-3 form-control w-25' onChange={handleCategory}>
-                <option value="">Filtro por Categoría</option>
-                {Array.from( // Convierte el conjunto de nuevo en un array para poder mapearlo.
-                    // Utilizamos Set para eliminar duplicados de las categorías obtenidas
-                    new Set(
-                        // Mapeamos los libros para obtener solo las categorías
-                        books
-                            .map(book => book.category)
-                            // Filtramos para eliminar cualquier categoría que sea null, undefined o vacía ("")
-                            .filter(category => category)
-                    )
-                ).map((category, index) => (
-                    // Generamos una opción por cada categoría, asignando una key única usando el índice
-                    <option key={index} value={category}>{category}</option>
-                ))}
-            </select>
-            <input
-                type='text'
-                placeholder='Search by title...'
-                value={searchTerm}
-                onChange={handleSearch}
-                className='form-control mb-4'
-            />
+            <div className='d-flex justify-content-between align-items-center my-4 gap-2'>
+                <select className='form-control w-25 m-auto filter text-light' onChange={handleCategory}>
+                    <option className='filter' value="">Filtrar por categoría</option>
+                    {Array.from( // Convierte el conjunto de nuevo en un array para poder mapearlo.
+                        // Utilizamos Set para eliminar duplicados de las categorías obtenidas
+                        new Set(
+                            // Mapeamos los libros para obtener solo las categorías
+                            books
+                                .map(book => book.category)
+                                // Filtramos para eliminar cualquier categoría que sea null, undefined o vacía ("")
+                                .filter(category => category)
+                        )
+                    ).map((category, index) => (    
+                        // Generamos una opción por cada categoría, asignando una key única usando el índice
+                        <option className='filter' key={index} value={category}>{category}</option>
+                    ))}
+                </select>
+                <input
+                    className='form-control w-75 filter custom-input'
+                    type='text'
+                    placeholder='Buscar por título...'
+                    value={searchTerm}
+                    onChange={handleSearch}
+                />
+            </div>
             <div className="row">
                 {Array.isArray(filteredBooks) && filteredBooks.map((book, index) => (
                     <div className='col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mb-4' key={index}>
-                        <div className='card text-center h-100' style={{ maxHeight: '450px' }}>
+                        <div className='card text-center h-100' style={{ maxHeight: '450px', backgroundColor: 'rgba(255, 255, 255, 0.6)' }}>
                             <img
                                 className='img-fluid w-100'
                                 src={book.cover}
@@ -269,6 +271,7 @@ const Home = () => {
                     style={{
                         overflowY: 'auto', // Permite el scroll vertical
                         maxHeight: 'calc(100vh - 100px)', // Altura máxima para no salir de la pantalla
+                        background: ' rgb(254, 255, 198)'
                     }}
                 >
                     {selectedBooks.length > 0 ? (
@@ -286,7 +289,7 @@ const Home = () => {
                 </div>
                 {/* Footer del Offcanvas */}
                 <div
-                    className="offcanvas-footer text-light"
+                    className="offcanvas-footer text-light position-fixed w-100"
                     style={{
                         padding: '10px 20px',
                         borderTop: '1px solid #dee2e6',
@@ -301,7 +304,7 @@ const Home = () => {
                             <button className='btn btn-success'>Mi Carrito <i className="bi bi-cart-check-fill"></i></button>
                         </Link>
                     </div>
-                
+
                 </div>
             </div>
 

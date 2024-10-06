@@ -118,11 +118,11 @@ const Login = () => {
 
 
     return (
-        <div className="container-fluid py-5">
+        <div className="container-fluid py-5 back-login">
             <div className="row">
                 <div className="col login">
                     <form action="" onSubmit={changeRegisterLogin ? handleRegister : handleLogin}>
-                        <div className="card w-50 m-auto p-4">
+                        <div className="card w-50 m-auto p-4 back-login2">
                             <h3 className='text-center my-4'>{changeRegisterLogin ? 'Register' : 'Login'}</h3>
                             {changeRegisterLogin &&
                                 <div className='w-50 m-auto mb-3'>
@@ -171,12 +171,12 @@ const Login = () => {
                             }
                             {changeRegisterLogin ? (
                                 <div className='d-flex flex-column'>
-                                    <button onClick={handleRegister} type='submit' className='btn btn-warning w-25 m-auto'>Sign Up</button>
+                                    <button onClick={handleRegister} type='submit' className='btn btn-warning m-auto'>Sign Up</button>
                                     <a onClick={() => setChangeRegisterLogin(false)} className='text-center mt-3'> Already have an account! </a>
                                 </div>
                             ) : (
                                 <div className='d-flex flex-column'>
-                                    <button onClick={handleLogin} type='submit' className='btn btn-success w-25 m-auto'>Log In</button>
+                                    <button onClick={handleLogin} type='submit' className='btn btn-success m-auto'>Log In</button>
                                     <a onClick={() => setChangeRegisterLogin(true)} className='text-center mt-3'> Create Acount! </a>
                                 </div>
                             )}

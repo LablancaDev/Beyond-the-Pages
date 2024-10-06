@@ -2,24 +2,41 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+.home{
+  background-color: rgb(252, 229, 136)
+}
 
 /* navbar */
-
+.title{
+  font-size: 1.6em;
+}
 .navbar{
   width: 100vw;
   z-index: 1;
+  background: linear-gradient(to right, rgb(0, 78, 68), rgb(4, 158, 138), rgb(0, 105, 91));
 }
 .imageProfile {
   width: 2em;
-}
 
+}
 .logo {
   width: 2em;
 }
 .userName{
   color:rgb(0, 77, 67);
 }
-
+.menu-nav{
+  color: rgb(252, 229, 136)
+}
+.menu-nav:hover{
+  color: aquamarine;
+}
+.cart2{
+  color: rgb(252, 229, 136);
+}
+.cart2:hover{
+  color: aquamarine;
+}
 /* home */
 .home{
   z-index: -1;
@@ -27,12 +44,10 @@ a {
 .card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: 1px solid #dee2e6;
-  /* Bordes más claros */
   cursor: pointer;
 }
 
 .card-title {
-  /* Oculta el contenido que desborda */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -41,34 +56,43 @@ a {
 
 .card:hover {
   transform: scale(1.05);
-  /* Aumenta el tamaño ligeramente */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  /* Sombra al hacer hover */
 }
 
 .card-title {
   font-weight: bold;
-  /* Título más destacado */
 }
 
 .img-fluid {
   border-radius: 0.5rem;
-  /* Bordes redondeados para la imagen */
 }
 
 .container-fluid {
   padding: 20px;
-  /* Espaciado alrededor del contenedor */
 }
 
 h1 {
   color: #007bff;
-  /* Color del título */
 }
-
+.filter{
+  background-color:rgb(2, 136, 118);
+}
+.custom-input::placeholder {
+    color: white;
+    opacity: 1; 
+}
+.custom-input {
+    color: inherit; 
+}
 /* Cart */
 .cart {
   background: linear-gradient(rgb(105, 105, 105), rgb(204, 204, 204));
+}
+.back-cart{
+  background-color:rgb(16, 104, 92);
+}
+.back-card{
+  background-color: rgb(252, 229, 136)
 }
 /* offCanvas */
 .offcanvas-header, .offcanvas-footer{
@@ -78,8 +102,22 @@ h1 {
 .login{
   margin-top: 5em;
 }
+.back-login{
+  background-color:rgb(16, 104, 92);
+}
+.back-login2{
+  background-color: rgb(255, 241, 183);
+}
 /* profile */
 .profile-container{
   margin-top: 10em;
 }
+.footer{
+  background-color:rgb(0, 77, 67);
+}
 
+/* purchaseComplete */
+.purchase_complete{
+  background-color: rgb(255, 241, 183);
+  color:rgb(0, 77, 67);
+}

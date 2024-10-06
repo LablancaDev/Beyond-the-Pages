@@ -28,3 +28,15 @@ export interface CartBook extends Book {
 
     Con esta estructura, ahora tienes una interfaz CartBook que hereda todos los campos de Book y agrega el campo quantity, 
     permitiendo que puedas manejar libros en el carrito con esta nueva interfaz sin cambiar la original.*/
+
+    
+
+//Para la librería JSPDF No hay un paquete oficial @types/jspdf-autotable, se declaran los tipos manualmente.
+declare module 'jspdf' {
+  interface jsPDF {
+    autoTable: (options: any) => jsPDF;
+    lastAutoTable: {
+      finalY: number;
+    };
+  }
+}

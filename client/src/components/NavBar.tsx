@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { RootState, persistor } from '../redux/store'
 import { useDispatch } from 'react-redux'
 import { logout } from '../redux/authSlice'
-import imgBook from '../assets/img/book.png'
+import imgBook from '../assets/img/logo.png'
 
 
 const NavBar = () => {
@@ -24,10 +24,12 @@ const NavBar = () => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-body-secondary position-fixed">
+            <nav className="navbar navbar-expand-lg position-fixed">
                 <div className="container-fluid">
                     <img src={imgBook} alt="logo" className='img-fluid logo me-2' />
-                    <a className="navbar-brand" href="#">Beyond the pages</a>
+                    <Link to={"/home"}>
+                        <h1 className="navbar-brand title text-light">Beyond the pages</h1>
+                    </Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -35,14 +37,14 @@ const NavBar = () => {
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <Link to={"/home"}>
-                                    <a className="nav-link active" aria-current="page" href="#">Home</a>
+                                    <a className="nav-link menu-nav" aria-current="page" href="#">Tienda</a>
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Link</a>
+                                <a className="nav-link menu-nav" href="#">Link</a>
                             </li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a className="nav-link dropdown-toggle menu-nav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Dropdown
                                 </a>
                                 <ul className="dropdown-menu">
@@ -52,15 +54,12 @@ const NavBar = () => {
                                     <li><a className="dropdown-item" href="#">Something else here</a></li>
                                 </ul>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link disabled" aria-disabled="true">Disabled</a>
-                            </li>
                         </ul>
                         <div className='d-flex justify-content-center gap-3'>
                             <Link to={"/cart"}>
-                                <a href=""><i className="bi bi-bag-heart-fill"></i></a>
+                                <a className='cart2' href=""><i className="bi bi-bag-heart-fill"></i></a>
                             </Link>
-                            <div className="dropdown">
+                            <div className="dropdown menu-nav">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Login
                                 </a>
@@ -69,20 +68,20 @@ const NavBar = () => {
                                         <li><a className="dropdown-item" href="#">Login</a></li>
                                     </Link>
                                     <Link to={"/profile"}>
-                                        <li><a className="dropdown-item" href="#">My profile</a></li>
+                                        <li><a className="dropdown-item" href="#">Mi perfil</a></li>
                                     </Link>
                                     <li><hr className="dropdown-divider" /></li>
                                     <li><a onClick={log_out} className="dropdown-item" href="#">Log out</a></li>
                                 </ul>
                             </div>
-                            <div className='userName'>{userName}</div>
+                            <div className='userName text-light'>{userName}</div>
                             {profileImage &&
                                 <img className='img-fluid imageProfile' src={`http://localhost:5000/uploads/${profileImage}`} alt="profile image" />
                             }
                         </div>
                     </div>
                 </div>
-            </nav>
+            </nav >
         </>
     )
 }
