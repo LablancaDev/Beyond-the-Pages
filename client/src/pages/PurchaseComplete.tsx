@@ -20,7 +20,7 @@ const PurchaseComplete = () => {
         <div className='container-fluid d-flex flex-column min-vh-100 purchase_complete'>
             <div className="row flex-grow-1" style={{ height: '50%' }}>
                 <div className="col d-flex align-items-center justify-content-center">
-                    <h2>Gracias por realizar tu compra y confiar en nostros!</h2>
+                    <h2>Gracias por realizar tu compra y confiar en nosotros!</h2>
                 </div>
             </div>
         </div>

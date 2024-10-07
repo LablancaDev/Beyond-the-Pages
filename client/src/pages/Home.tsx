@@ -7,10 +7,12 @@ import { useDispatch } from 'react-redux';
 import { fetchBooksFailure, fetchBooksStart, fetchBooksSuccess } from '../redux/booksSlice';
 import { addToCart } from '../redux/cartSlice';
 import banner from '../assets/img/banner.webp'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Home = () => {
+
+    const navigate = useNavigate() 
 
     // Obtener la URL base de la API según el entorno
     const apiUrl = import.meta.env.MODE === 'production'
@@ -185,6 +187,16 @@ const Home = () => {
     // Calcular el total de la cantidad de libros en el carrito
     const totalQuantity = selectedBooks.reduce((total, book) => total + book.quantity, 0);
 
+    // Calcular el precio anterior con un 5% de descuento
+    const previousPrice = filteredBooks.map(book => ({
+        ...book,
+        previousPrice: (book.price * 1.05).toFixed(2)
+    }))
+
+    const handleNavigateToCart = () => {
+        navigate("/cart", { state: { previousPrice: previousPrice } });
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -208,7 +220,7 @@ const Home = () => {
                                 // Filtramos para eliminar cualquier categoría que sea null, undefined o vacía ("")
                                 .filter(category => category)
                         )
-                    ).map((category, index) => (    
+                    ).map((category, index) => (
                         // Generamos una opción por cada categoría, asignando una key única usando el índice
                         <option className='filter' key={index} value={category}>{category}</option>
                     ))}
@@ -222,7 +234,7 @@ const Home = () => {
                 />
             </div>
             <div className="row">
-                {Array.isArray(filteredBooks) && filteredBooks.map((book, index) => (
+                {Array.isArray(previousPrice) && previousPrice.map((book, index) => (
                     <div className='col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mb-4' key={index}>
                         <div className='card text-center h-100' style={{ maxHeight: '450px', backgroundColor: 'rgba(255, 255, 255, 0.6)' }}>
                             <img
@@ -235,6 +247,10 @@ const Home = () => {
                                 <h6 className='card-title' style={{ minHeight: '50px' }}>{book.title}</h6>
                             </div>
                             <div>
+                                <div className='d-flex justify-content-center align-items-center gap-2'>
+                                    <h6 className='text-secondary text-decoration-line-through'>{book.previousPrice} €</h6>
+                                    <h6 className='text-light bg-danger w-25'>-5%</h6>
+                                </div>
                                 <h5 className='text-danger'>{book.price} €</h5>
                                 <p className='text-success'>ENVÍO GRATIS! <i className="bi bi-truck"></i></p>
                             </div>
@@ -300,7 +316,9 @@ const Home = () => {
                 >
                     <h5>Total de Libros: <span className='text-danger'>{totalQuantity} unidades</span></h5>
                     <div className='my-3 w-100'>
-                        <Link to={"/cart"}>
+                        <Link
+                            to={'/cart'}
+                        >
                             <button className='btn btn-success'>Mi Carrito <i className="bi bi-cart-check-fill"></i></button>
                         </Link>
                     </div>
