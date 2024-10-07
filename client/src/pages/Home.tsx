@@ -7,12 +7,10 @@ import { useDispatch } from 'react-redux';
 import { fetchBooksFailure, fetchBooksStart, fetchBooksSuccess } from '../redux/booksSlice';
 import { addToCart } from '../redux/cartSlice';
 import banner from '../assets/img/banner.webp'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const Home = () => {
-
-    const navigate = useNavigate() 
 
     // Obtener la URL base de la API según el entorno
     const apiUrl = import.meta.env.MODE === 'production'
@@ -192,10 +190,6 @@ const Home = () => {
         ...book,
         previousPrice: (book.price * 1.05).toFixed(2)
     }))
-
-    const handleNavigateToCart = () => {
-        navigate("/cart", { state: { previousPrice: previousPrice } });
-    };
 
     if (loading) {
         return <div>Loading...</div>;
