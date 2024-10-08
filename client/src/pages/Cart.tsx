@@ -224,10 +224,11 @@ const Cart = () => {
             <div className='card w-100 back-card' style={{ maxHeight: '450px' }} key={index}>
               <img className='w-100 img-fluid' src={book.cover} style={{ height: '200px', objectFit: 'cover' }} alt="" />
               <div className="card-body">
-                <h6 className='card-title text-center' style={{ minHeight: '50px' }}>{book.title}</h6>
+                <h6 className='card-title text-center' style={{ minHeight: '20px' }}>{book.title}</h6>
               </div>
               <div>
                 <h5 className='text-danger text-center'>{book.price} €</h5>
+                <p className='text-success text-center'>ENVÍO GRATIS! <i className="bi bi-truck"></i></p>
               </div>
               <div className='m-auto p-2'>
                 <button onClick={()=>removeFromMyCart(book.bookId)} className='btn btn-danger'>Eliminar <i className="bi bi-trash3"></i></button>

@@ -45,7 +45,7 @@ const NavBar = () => {
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle menu-nav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown
+                                    Menu
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li><a className="dropdown-item" href="#">Action</a></li>
@@ -61,17 +61,17 @@ const NavBar = () => {
                             </Link>
                             <div className="dropdown menu-nav">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Login
+                                    Mi Cuenta
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end mt-2"> {/* Alinea el menú a la derecha */}
                                     <Link to={"/login"}>
-                                        <li><a className="dropdown-item" href="#">Login</a></li>
+                                        <li><a className="dropdown-item" href="#">Iniciar Sesión</a></li>
                                     </Link>
                                     <Link to={"/profile"}>
                                         <li><a className="dropdown-item" href="#">Mi perfil</a></li>
                                     </Link>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><a onClick={log_out} className="dropdown-item" href="#">Log out</a></li>
+                                    <li><a onClick={log_out} className="dropdown-item" href="#">Cerrar Sesión</a></li>
                                 </ul>
                             </div>
                             <div className='userName text-light'>{userName}</div>

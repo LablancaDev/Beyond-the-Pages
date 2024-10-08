@@ -121,3 +121,44 @@ h1 {
   background-color: rgb(255, 241, 183);
   color:rgb(0, 77, 67);
 }
+/* book_detail */
+
+.bookDetail{
+  margin-top: 7em;
+}
+.book-image {
+  transition: transform 0.3s ease;
+}
+
+.zoom-on-hover:hover {
+  transform: scale(1.1); 
+}
+
+/* Estilo de la tarjeta */
+.card-detail {
+  margin: auto;
+  width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  background-color: rgb(255, 241, 183);
+}
+
+.image-container {
+  overflow: hidden; 
+}
+
+.card-body h4 {
+  font-weight: 600;
+  color: #333;
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.card-body h5 {
+  font-weight: bold;
+  font-size: 1.5rem;
+}

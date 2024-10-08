@@ -230,13 +230,18 @@ const Home = () => {
             <div className="row">
                 {Array.isArray(previousPrice) && previousPrice.map((book, index) => (
                     <div className='col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mb-4' key={index}>
-                        <div className='card text-center h-100' style={{ maxHeight: '450px', backgroundColor: 'rgba(255, 255, 255, 0.6)' }}>
-                            <img
-                                className='img-fluid w-100'
-                                src={book.cover}
-                                alt={book.title}
-                                style={{ height: '200px', objectFit: 'cover' }}
-                            />
+                        <div className='card text-center h-100' style={{ maxHeight: '500px', backgroundColor: 'rgba(255, 255, 255, 0.6)' }}>
+                            <Link
+                                to="/bookdetail"
+                                state={{ book }} // Pasamos el libro seleccionado a la página bookdetails, en bookdetails usaré location para acceder a los datos 
+                            >
+                                <img
+                                    className='img-fluid w-100'
+                                    src={book.cover}
+                                    alt={book.title}
+                                    style={{ height: '200px', objectFit: 'cover' }}
+                                />
+                            </Link>
                             <div className='card-body'>
                                 <h6 className='card-title' style={{ minHeight: '50px' }}>{book.title}</h6>
                             </div>
