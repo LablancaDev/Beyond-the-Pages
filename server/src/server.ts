@@ -29,7 +29,8 @@ const allowedOrigins = [
     'http://127.0.0.1:5500', // Origen local que está causando problemas (añadido aquí)
     'https://beyond-the-pages-seven.vercel.app',
     'https://beyond-the-pages-kporvhnyh-davids-projects-5a52dd2e.vercel.app',  // url de produccion sin estilos 
-    'https://beyond-the-pages-56ujxm8yj-davids-projects-5a52dd2e.vercel.app'    // url de produccion final  
+    'https://beyond-the-pages-56ujxm8yj-davids-projects-5a52dd2e.vercel.app',    // url de produccion final 
+    'https://beyond-the-pages-axelcm53t-davids-projects-5a52dd2e.vercel.app '
 ];
 
 // Configuración de CORS
