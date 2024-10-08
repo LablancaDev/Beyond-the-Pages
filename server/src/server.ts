@@ -30,7 +30,8 @@ const allowedOrigins = [
     'https://beyond-the-pages-seven.vercel.app',
     'https://beyond-the-pages-kporvhnyh-davids-projects-5a52dd2e.vercel.app',  // url de produccion sin estilos 
     'https://beyond-the-pages-56ujxm8yj-davids-projects-5a52dd2e.vercel.app',    // url de produccion final 
-    'https://beyond-the-pages-axelcm53t-davids-projects-5a52dd2e.vercel.app '
+    'https://beyond-the-pages-axelcm53t-davids-projects-5a52dd2e.vercel.app ',
+    'https://beyond-the-pages-njujh9la7-davids-projects-5a52dd2e.vercel.app/'
 ];
 
 // Configuración de CORS
